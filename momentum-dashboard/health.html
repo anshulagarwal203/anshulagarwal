@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — System Health</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>System Health</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div id="health-container"></div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("health.html");
+  const h = await fetchJSON("health.json");
+
+  document.getElementById("generated-at").textContent = h
+    ? `Generated ${fmtDate(h.generated_at)}`
+    : "No data yet.";
+
+  const c = document.getElementById("health-container");
+  if (!h) { c.innerHTML = emptyState("No health.json yet."); return; }
+
+  const rows = [
+    ["Overall", h.overall_healthy],
+    ["Scheduler", h.scheduler && (h.scheduler.last_scan || h.scheduler.last_execute) ? true : null],
+    ["Broker Connection", h.broker_connection ? h.broker_connection.ok : null],
+    ["Authentication", h.authentication_status ? h.authentication_status.ok : null],
+    ["Email", h.email_status === "configured"],
+    ["Dashboard Generation", h.dashboard_status === "generated today"],
+    ["Portfolio Sync (reconciliation)", h.portfolio_sync ? h.portfolio_sync.ok : null],
+    ["Report Generation", h.report_generation && h.report_generation.dashboard === "generated today"],
+    ["Automation Halted", h.automation_halted === false ? true : h.automation_halted === true ? false : null],
+  ];
+  const details = {
+    "Overall": h.overall_healthy ? "All checks passed" : "See breakdown below",
+    "Scheduler": `Last scan: ${h.scheduler?.last_scan ?? "never"} · Last execute: ${h.scheduler?.last_execute ?? "never"} · Next run: ${h.scheduler?.next_scheduled_run ?? "n/a"}`,
+    "Broker Connection": h.broker_connection?.detail ?? "n/a",
+    "Authentication": h.authentication_status?.detail ?? "n/a",
+    "Email": h.email_status,
+    "Dashboard Generation": h.dashboard_status,
+    "Portfolio Sync (reconciliation)": h.portfolio_sync?.detail ?? "n/a",
+    "Report Generation": h.report_generation?.last_diagnostics?.available
+      ? `Last diagnostics: ${fmtDate(h.report_generation.last_diagnostics.timestamp)}` : "No diagnostics run yet",
+    "Automation Halted": h.automation_halt_detail ?? "n/a",
+  };
+
+  let html = `<div class="panel"><h3>Component Status</h3><div class="table-scroll"><table><thead>
+    <tr><th>Component</th><th>Status</th><th>Detail</th></tr></thead><tbody>`;
+  rows.forEach(([label, ok]) => {
+    html += `<tr><td>${label}</td><td>${statusBadge(ok)}</td><td class="muted">${details[label] ?? ""}</td></tr>`;
+  });
+  html += `</tbody></table></div></div>`;
+
+  html += `<div class="panel"><h3>Last Successful Run</h3><p>${h.last_successful_run ?? "Never"}</p></div>`;
+
+  if (h.checks) {
+    html += `<div class="panel"><h3>Full Health Check Detail</h3><div class="table-scroll"><table><thead>
+      <tr><th>Check</th><th>Status</th><th>Detail</th></tr></thead><tbody>`;
+    for (const [name, c2] of Object.entries(h.checks)) {
+      html += `<tr><td>${name}</td><td>${statusBadge(c2.ok)}</td><td class="muted">${c2.detail ?? ""}</td></tr>`;
+    }
+    html += `</tbody></table></div></div>`;
+  }
+
+  c.innerHTML = html;
+})();
+</script>
+</body>
+</html>

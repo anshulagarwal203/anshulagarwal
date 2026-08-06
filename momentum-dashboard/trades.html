@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Trade History</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Trade History</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div class="panel">
+    <div class="table-scroll">
+      <table id="trades-table">
+        <thead>
+          <tr><th>Symbol</th><th>Entry Date</th><th>Exit Date</th><th>Holding Period</th>
+              <th>Entry Price</th><th>Exit Price</th><th>Shares</th>
+              <th>P&amp;L</th><th>Return %</th><th>Exit Reason</th></tr>
+        </thead>
+        <tbody id="trades-body"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("trades.html");
+  const trades = await fetchJSON("trades.json");
+
+  document.getElementById("generated-at").textContent = trades
+    ? `Generated ${fmtDate(trades.generated_at)} — ${trades.trades.length} completed paper trade(s)`
+    : "No data yet.";
+
+  const body = document.getElementById("trades-body");
+  if (!trades || trades.trades.length === 0) {
+    document.getElementById("trades-table").outerHTML = emptyState("No completed paper trades yet.");
+    return;
+  }
+
+  body.innerHTML = trades.trades.map(t => `
+    <tr>
+      <td><strong>${t.symbol.replace(".NS", "")}</strong></td>
+      <td>${t.entry_date}</td>
+      <td>${t.exit_date}</td>
+      <td>${t.holding_period_days ?? "—"}d</td>
+      <td>${fmtCurrency(t.entry_price, 2)}</td>
+      <td>${fmtCurrency(t.exit_price, 2)}</td>
+      <td>${t.shares}</td>
+      <td class="${signClass(t.pnl)}">${fmtCurrency(t.pnl, 2)}</td>
+      <td class="${signClass(t.return_pct)}">${fmtPct(t.return_pct)}</td>
+      <td class="muted">${t.exit_reason ?? "—"}</td>
+    </tr>`).join("");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Statistics</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Performance Statistics</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div id="stats-container"></div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("statistics.html");
+  const stats = await fetchJSON("statistics.json");
+
+  document.getElementById("generated-at").textContent = stats
+    ? `Generated ${fmtDate(stats.generated_at)}`
+    : "No data yet.";
+
+  const c = document.getElementById("stats-container");
+  if (!stats) { c.innerHTML = emptyState("No statistics.json yet."); return; }
+
+  const returnMetrics = [
+    ["CAGR", stats.cagr_pct, "pct"],
+    ["Annualized Return", stats.annualized_return_pct, "pct"],
+    ["Volatility", stats.annualized_volatility_pct, "pct"],
+    ["Total Return", stats.total_return_pct, "pct"],
+  ];
+  const riskMetrics = [
+    ["Sharpe Ratio", stats.sharpe_ratio, "num"],
+    ["Sortino Ratio", stats.sortino_ratio, "num"],
+    ["Calmar Ratio", stats.calmar_ratio, "num"],
+    ["Maximum Drawdown", stats.max_drawdown_pct, "pct"],
+  ];
+  const tradeMetrics = [
+    ["Total Trades", stats.n_trades, "raw"],
+    ["Win Rate", stats.win_rate_pct, "pct"],
+    ["Profit Factor", stats.profit_factor, "num"],
+    ["Average Win", stats.avg_win, "cur"],
+    ["Average Loss", stats.avg_loss, "cur"],
+    ["Largest Win", stats.largest_win, "cur"],
+    ["Largest Loss", stats.largest_loss, "cur"],
+    ["Expectancy / Trade", stats.expectancy_per_trade, "cur"],
+  ];
+  const exposureMetrics = [
+    ["Exposure %", stats.exposure_pct, "pctabs"],
+    ["Cash %", stats.cash_pct, "pctabs"],
+  ];
+
+  function fmtVal(v, kind) {
+    if (v === null || v === undefined) return "—";
+    if (kind === "pct") return fmtPct(v);
+    if (kind === "pctabs") return fmtNum(v) + "%";
+    if (kind === "cur") return fmtCurrency(v, 2);
+    if (kind === "num") return fmtNum(v);
+    return v;
+  }
+  function section(title, metrics) {
+    return `<div class="panel"><h3>${title}</h3><div class="kpi-grid">
+      ${metrics.map(([label, v, kind]) => `
+        <div class="kpi-card"><div class="label">${label}</div>
+          <div class="value ${kind !== "raw" && kind !== "pctabs" ? signClass(v) : ""}">${fmtVal(v, kind)}</div></div>`).join("")}
+    </div></div>`;
+  }
+
+  let html = section("Returns", returnMetrics) + section("Risk-Adjusted", riskMetrics) +
+             section("Trade Statistics", tradeMetrics) + section("Exposure", exposureMetrics);
+
+  if (!stats.equity_history_sufficient) {
+    html += `<p class="subtitle">${stats.equity_history_note || "Some equity-curve metrics are withheld until enough trading history accumulates."}</p>`;
+  }
+
+  c.innerHTML = html;
+})();
+</script>
+</body>
+</html>

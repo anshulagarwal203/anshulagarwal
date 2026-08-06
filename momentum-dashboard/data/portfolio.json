@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-08-05T23:42:39.422533",
+  "mode": "PAPER",
+  "portfolio_value": 1000000.0,
+  "cash": 1000000.0,
+  "invested_capital": 0.0,
+  "open_pnl": null,
+  "closed_pnl": 0.0,
+  "num_holdings": 0,
+  "today_return": null,
+  "weekly_return": null,
+  "monthly_return": null,
+  "ytd_return": null,
+  "cagr_pct": null,
+  "win_rate_pct": 0,
+  "sharpe_ratio": null,
+  "sortino_ratio": null,
+  "max_drawdown_pct": null,
+  "equity_history_sufficient": false
+}

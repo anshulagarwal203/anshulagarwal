@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Anshul Agarwal</title>
+<meta name="description" content="Read-only performance dashboard for the India Momentum Trader paper portfolio.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Portfolio Overview</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div class="read-only-banner">Read-only. This page never executes trades — it only displays data generated after each paper trading session by the India Momentum Trader strategy.</div>
+
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <p class="subtitle" id="insufficient-note" style="display:none;"></p>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("index.html");
+  const portfolio = await fetchJSON("portfolio.json");
+
+  document.getElementById("generated-at").textContent = portfolio
+    ? `Generated ${fmtDate(portfolio.generated_at)}`
+    : "No data yet — the dashboard updates after the next paper trading session.";
+
+  const kpiGrid = document.getElementById("kpi-grid");
+  if (!portfolio) {
+    kpiGrid.innerHTML = emptyState("No portfolio.json yet.");
+    return;
+  }
+
+  const cards = [
+    { label: "Paper Portfolio Value", value: fmtCurrency(portfolio.portfolio_value) },
+    { label: "Daily Return", value: portfolio.today_return ? fmtPct(portfolio.today_return.change_pct) : "—", cls: portfolio.today_return ? signClass(portfolio.today_return.change_pct) : "" },
+    { label: "Weekly Return", value: portfolio.weekly_return ? fmtPct(portfolio.weekly_return.change_pct) : "—", cls: portfolio.weekly_return ? signClass(portfolio.weekly_return.change_pct) : "" },
+    { label: "Monthly Return", value: portfolio.monthly_return ? fmtPct(portfolio.monthly_return.change_pct) : "—", cls: portfolio.monthly_return ? signClass(portfolio.monthly_return.change_pct) : "" },
+    { label: "YTD Return", value: portfolio.ytd_return ? fmtPct(portfolio.ytd_return.change_pct) : "—", cls: portfolio.ytd_return ? signClass(portfolio.ytd_return.change_pct) : "" },
+    { label: "CAGR", value: portfolio.cagr_pct !== null ? fmtPct(portfolio.cagr_pct) : "insufficient history" },
+    { label: "Current Cash", value: fmtCurrency(portfolio.cash) },
+    { label: "Invested Capital", value: fmtCurrency(portfolio.invested_capital) },
+    { label: "Number of Holdings", value: portfolio.num_holdings },
+    { label: "Open P&L", value: fmtCurrency(portfolio.open_pnl), cls: signClass(portfolio.open_pnl) },
+    { label: "Closed P&L", value: fmtCurrency(portfolio.closed_pnl), cls: signClass(portfolio.closed_pnl) },
+    { label: "Win Rate", value: fmtPct(portfolio.win_rate_pct, 1) },
+    { label: "Sharpe Ratio", value: portfolio.sharpe_ratio !== null ? fmtNum(portfolio.sharpe_ratio) : "insufficient history" },
+    { label: "Sortino Ratio", value: portfolio.sortino_ratio !== null ? fmtNum(portfolio.sortino_ratio) : "insufficient history" },
+    { label: "Maximum Drawdown", value: portfolio.max_drawdown_pct !== null ? fmtPct(portfolio.max_drawdown_pct) : "insufficient history", cls: "neg" },
+  ];
+  kpiGrid.innerHTML = cards.map(c => `
+    <div class="kpi-card"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
+
+  if (!portfolio.equity_history_sufficient) {
+    document.getElementById("insufficient-note").style.display = "block";
+    document.getElementById("insufficient-note").textContent =
+      "CAGR/Sharpe/Sortino/Maximum Drawdown need at least a few days of real paper-trading history — shown once available.";
+  }
+})();
+</script>
+</body>
+</html>

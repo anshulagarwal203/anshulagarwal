@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Benchmark</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Benchmark Comparison</h1>
+  <p class="subtitle" id="generated-at">Loading… normalized to 100 on Day 1.</p>
+  <div id="benchmarks-container"></div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("benchmark.html");
+  const bench = await fetchJSON("benchmark.json");
+
+  document.getElementById("generated-at").textContent = bench
+    ? `Generated ${fmtDate(bench.generated_at)} — normalized to 100 on Day 1.`
+    : "No data yet.";
+
+  const container = document.getElementById("benchmarks-container");
+  if (!bench || !bench.benchmarks) {
+    container.innerHTML = emptyState("No benchmark data yet — updates after the next paper trading session.");
+    return;
+  }
+
+  // Only Nifty 50 and Nifty 500, per this dashboard's scope.
+  const wanted = ["NIFTY50", "NIFTY500"];
+  let html = "";
+  for (const key of wanted) {
+    const b = bench.benchmarks[key];
+    if (!b) continue;
+    const canvasId = `chart-${key}`;
+    const rm = b.relative_metrics || {};
+    html += `
+      <div class="panel">
+        <h3>Portfolio vs ${b.name} (${b.ticker})</h3>
+        ${!b.available ? emptyState(b.note || "Unavailable") : `
+          <canvas id="${canvasId}" style="width:100%;height:260px;"></canvas>
+          <div class="kpi-grid" style="margin-top:16px;">
+            <div class="kpi-card"><div class="label">Alpha (annualized)</div><div class="value ${signClass(rm.alpha_annualized_pct)}">${rm.available ? fmtPct(rm.alpha_annualized_pct) : "—"}</div></div>
+            <div class="kpi-card"><div class="label">Relative Performance</div><div class="value ${signClass(rm.relative_performance_pct)}">${rm.available ? fmtPct(rm.relative_performance_pct) : "—"}</div></div>
+            <div class="kpi-card"><div class="label">Maximum Drawdown</div><div class="value neg">${rm.available ? fmtPct(rm.portfolio_max_drawdown_pct) : "—"}</div></div>
+            <div class="kpi-card"><div class="label">Information Ratio</div><div class="value">${rm.available ? fmtNum(rm.information_ratio) : "—"}</div></div>
+          </div>
+          ${!rm.available ? `<p class="subtitle" style="margin-top:12px">${rm.note || "Not enough aligned history yet."}</p>` : ""}
+        `}
+      </div>`;
+  }
+  container.innerHTML = html || emptyState("No benchmark data available.");
+
+  for (const key of wanted) {
+    const b = bench.benchmarks[key];
+    if (b && b.available && b.normalized_portfolio) {
+      simpleLineChart(`chart-${key}`, [
+        { label: "Portfolio", color: CHART_COLORS.portfolio, points: seriesFromDict(b.normalized_portfolio) },
+        { label: b.name, color: CHART_COLORS.benchmark, points: seriesFromDict(b.normalized_benchmark) },
+      ], { yDecimals: 0 });
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-08-05T23:42:42.119197",
+  "overall_healthy": false,
+  "scheduler": {
+    "last_scan": null,
+    "last_execute": null,
+    "last_health_check": null,
+    "next_scheduled_run": "2026-08-05 at 16:00 IST (scan) / 09:00 IST (execute)"
+  },
+  "broker_connection": {
+    "ok": false,
+    "detail": "Failed: Access token file present"
+  },
+  "authentication_status": {
+    "name": "Authentication",
+    "ok": false,
+    "detail": "'Zerodha authentication' not found in startup_check results"
+  },
+  "email_status": "configured",
+  "dashboard_status": "generated today",
+  "portfolio_sync": {
+    "ok": true,
+    "detail": "No halt flags present"
+  },
+  "report_generation": {
+    "dashboard": "generated today",
+    "last_diagnostics": {
+      "available": true,
+      "timestamp": "2026-08-05T22:50:52.507421",
+      "overall_ok": false,
+      "checks": [
+        {
+          "name": "Authentication",
+          "ok": false,
+          "detail": "'Zerodha authentication' not found in startup_check results"
+        },
+        {
+          "name": "Funds",
+          "ok": false,
+          "detail": "'Margin request' not found in startup_check results"
+        },
+        {
+          "name": "Holdings",
+          "ok": false,
+          "detail": "'Holdings request' not found in startup_check results"
+        },
+        {
+          "name": "Positions",
+          "ok": false,
+          "detail": "'Positions request' not found in startup_check results"
+        },
+        {
+          "name": "Historical Data",
+          "ok": false,
+          "detail": "'Historical data request' not found in startup_check results"
+        },
+        {
+          "name": "Instrument Lookup",
+          "ok": false,
+          "detail": "'Instrument lookup' not found in startup_check results"
+        },
+        {
+          "name": "Open Orders",
+          "ok": false,
+          "detail": "Skipped \u2014 no authenticated Kite session"
+        },
+        {
+          "name": "Market Quotes",
+          "ok": false,
+          "detail": "Skipped \u2014 no authenticated Kite session"
+        },
+        {
+          "name": "Order Validation",
+          "ok": false,
+          "detail": "Skipped \u2014 no authenticated Kite session"
+        },
+        {
+          "name": "Scheduler",
+          "ok": true,
+          "detail": "scan=16:00 execute=09:00 IST, NSE calendar reachable (today is a trading day)"
+        },
+        {
+          "name": "Email",
+          "ok": true,
+          "detail": "Credentials present for anshul.trading.alerts@gmail.com -> agarwalanshul031@gmail.com"
+        },
+        {
+          "name": "Dashboard",
+          "ok": true,
+          "detail": "Generated C:\\Users\\Samsung\\Desktop\\Finance REadings\\india_momentum_v2\\reports\\2026-08-05\\dashboard.html"
+        },
+        {
+          "name": "Logging",
+          "ok": true,
+          "detail": "swing_trader.log writable, 1 daily-log file(s) found, logs are appended forever (no rotation/deletion anywhere in this project)"
+        },
+        {
+          "name": "Auto Execute Wiring",
+          "ok": true,
+          "detail": "live-confirmation gate present: True, 10/10 pre-trade checks present: True, current mode: PAPER"
+        }
+      ]
+    }
+  },
+  "automation_halted": false,
+  "automation_halt_detail": "Not halted",
+  "last_successful_run": "2026-08-05T22:46:35.458952",
+  "checks": {
+    "last_successful_scan": {
+      "ok": true,
+      "detail": "Last run 0.9h ago (2026-08-05T22:46:35.458952, phase=scan, mode=PAPER)"
+    },
+    "positions_file": {
+      "ok": true,
+      "detail": "No positions file (flat \u2014 fine if nothing is held)"
+    },
+    "halt_flags": {
+      "ok": true,
+      "detail": "No halt flags present"
+    },
+    "disk_usage": {
+      "ok": true,
+      "detail": "207.0 GB free"
+    },
+    "log_size": {
+      "ok": true,
+      "detail": "0.03 MB total across daily logs"
+    },
+    "package_versions": {
+      "ok": true,
+      "detail": "Python 3.14.5, pandas 3.0.3, numpy 2.4.6, yfinance 1.3.0, kiteconnect 5.2.0"
+    },
+    "data_source": {
+      "ok": true,
+      "detail": "Yahoo Finance reachable"
+    },
+    "broker_connection": {
+      "ok": false,
+      "detail": "Failed: Access token file present"
+    }
+  }
+}

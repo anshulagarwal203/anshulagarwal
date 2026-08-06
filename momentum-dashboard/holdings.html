@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Holdings</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Current Holdings</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div class="panel">
+    <div class="table-scroll">
+      <table id="holdings-table">
+        <thead>
+          <tr><th>Ticker</th><th>Company</th><th>Sector</th><th>Shares</th>
+              <th>Entry Price</th><th>Current Price</th><th>Unrealized P&amp;L</th>
+              <th>Days Held</th><th>Momentum Rank</th></tr>
+        </thead>
+        <tbody id="holdings-body"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("holdings.html");
+  const holdings = await fetchJSON("holdings.json");
+
+  document.getElementById("generated-at").textContent = holdings
+    ? `Generated ${fmtDate(holdings.generated_at)} — ${holdings.holdings.length} position(s)`
+    : "No data yet.";
+
+  const body = document.getElementById("holdings-body");
+  if (!holdings || holdings.holdings.length === 0) {
+    document.getElementById("holdings-table").outerHTML = emptyState("No open positions.");
+    return;
+  }
+
+  body.innerHTML = holdings.holdings.map(h => {
+    const unrealized = h.current_price !== null && h.entry_price !== null
+      ? (h.current_price - h.entry_price) * h.shares : null;
+    return `
+    <tr>
+      <td><strong>${h.ticker.replace(".NS", "")}</strong></td>
+      <td>${h.company}</td>
+      <td>${h.sector}</td>
+      <td>${h.shares}</td>
+      <td>${fmtCurrency(h.entry_price, 2)}</td>
+      <td>${fmtCurrency(h.current_price, 2)}</td>
+      <td class="${signClass(unrealized)}">${fmtCurrency(unrealized, 2)}</td>
+      <td>${h.holding_days ?? "—"}</td>
+      <td>${h.momentum_rank ?? "—"}</td>
+    </tr>`;
+  }).join("");
+})();
+</script>
+</body>
+</html>

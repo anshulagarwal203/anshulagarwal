@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Latest Daily Report</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>Latest Daily Report</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div id="report-container"></div>
+
+  <h2>Recent PDF Reports</h2>
+  <div class="panel">
+    <ul class="pdf-list" id="pdf-list"></ul>
+  </div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("report.html");
+  const r = await fetchJSON("latest_report.json");
+
+  document.getElementById("generated-at").textContent = r
+    ? `As of ${fmtDate(r.as_of)} — mode: ${r.mode}, phase: ${r.phase ?? "n/a"}`
+    : "No data yet.";
+
+  const c = document.getElementById("report-container");
+  if (!r) { c.innerHTML = emptyState("No latest_report.json yet."); return; }
+
+  let html = `<div class="kpi-grid">
+    <div class="kpi-card"><div class="label">Portfolio Value</div><div class="value">${fmtCurrency(r.portfolio_value)}</div></div>
+    <div class="kpi-card"><div class="label">Cash</div><div class="value">${fmtCurrency(r.cash)}</div></div>
+    <div class="kpi-card"><div class="label">Holdings</div><div class="value">${r.num_holdings}</div></div>
+  </div>`;
+
+  html += `<div class="panel"><h3>Today's Trades</h3>`;
+  if (r.today_trades && r.today_trades.length) {
+    html += `<div class="table-scroll"><table><thead><tr>
+      <th>Symbol</th><th>Entry</th><th>Exit</th><th>Shares</th><th>P&amp;L</th><th>Return %</th><th>Reason</th>
+    </tr></thead><tbody>`;
+    r.today_trades.forEach(t => {
+      html += `<tr><td>${t.symbol.replace(".NS","")}</td><td>${fmtCurrency(t.entry_price,2)}</td>
+        <td>${fmtCurrency(t.exit_price,2)}</td><td>${t.shares}</td>
+        <td class="${signClass(t.pnl)}">${fmtCurrency(t.pnl,2)}</td>
+        <td class="${signClass(t.return_pct)}">${fmtPct(t.return_pct)}</td>
+        <td class="muted">${t.exit_reason ?? "—"}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    html += emptyState("No trades executed today.");
+  }
+  html += `</div>`;
+
+  html += `<div class="panel"><h3>Top 10 Momentum Candidates</h3>`;
+  if (r.top_10_candidates && r.top_10_candidates.length) {
+    html += `<div class="table-scroll"><table><thead><tr>
+      <th>Rank</th><th>Ticker</th><th>Name</th><th>Sector</th><th>Price</th><th>ROC%</th><th>RSI</th><th>Status</th>
+    </tr></thead><tbody>`;
+    r.top_10_candidates.forEach(t => {
+      html += `<tr><td>${t.rank}</td><td>${t.ticker.replace(".NS","")}</td><td>${t.name}</td>
+        <td>${t.sector}</td><td>${fmtCurrency(t.price,2)}</td>
+        <td class="${signClass(t.roc_pct)}">${fmtPct(t.roc_pct)}</td><td>${fmtNum(t.rsi,1)}</td>
+        <td class="muted">${t.status}${t.reason ? " (" + t.reason + ")" : ""}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  } else {
+    html += emptyState("No screening data yet.");
+  }
+  html += `</div>`;
+
+  if (r.commentary) {
+    html += `<div class="panel"><h3>Commentary</h3><p>${r.commentary}</p></div>`;
+  }
+
+  if ((r.errors && r.errors.length) || (r.warnings && r.warnings.length)) {
+    html += `<div class="panel"><h3>System Health (latest run)</h3><ul>`;
+    (r.errors || []).forEach(e => html += `<li class="neg">${e}</li>`);
+    (r.warnings || []).forEach(w => html += `<li class="muted">${w}</li>`);
+    html += `</ul></div>`;
+  }
+
+  c.innerHTML = html;
+
+  const pdfList = document.getElementById("pdf-list");
+  try {
+    const manifestRes = await fetch(`reports/manifest.json?t=${Date.now()}`, { cache: "no-store" });
+    const manifest = manifestRes.ok ? await manifestRes.json() : [];
+    pdfList.innerHTML = manifest.length
+      ? manifest.map(m => `<li><span>${m.date}</span><a class="download" href="reports/${m.filename}" download>↓ Download PDF</a></li>`).join("")
+      : emptyState("No PDF reports mirrored yet.");
+  } catch (e) {
+    pdfList.innerHTML = emptyState("No PDF reports mirrored yet.");
+  }
+})();
+</script>
+</body>
+</html>

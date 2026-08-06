@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-08-05T23:42:39.868306",
+  "benchmarks": {
+    "NIFTY50": {
+      "name": "Nifty 50",
+      "ticker": "^NSEI",
+      "available": true,
+      "normalized_portfolio": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "normalized_benchmark": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "relative_metrics": {
+        "available": false,
+        "n_days": 1,
+        "note": "Only 1 aligned day(s) \u2014 need at least 5 for a meaningful comparison."
+      },
+      "rolling_alpha_beta": {
+        "available": false,
+        "n_days": 1,
+        "note": "Need at least 21 aligned days for a 20-day rolling window; have 1."
+      }
+    },
+    "NIFTY500": {
+      "name": "Nifty 500",
+      "ticker": "^CRSLDX",
+      "available": true,
+      "normalized_portfolio": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "normalized_benchmark": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "relative_metrics": {
+        "available": false,
+        "n_days": 1,
+        "note": "Only 1 aligned day(s) \u2014 need at least 5 for a meaningful comparison."
+      },
+      "rolling_alpha_beta": {
+        "available": false,
+        "n_days": 1,
+        "note": "Need at least 21 aligned days for a 20-day rolling window; have 1."
+      }
+    },
+    "NIFTYMIDCAP150": {
+      "name": "Nifty Midcap 150",
+      "ticker": "NIFTYMIDCAP150.NS",
+      "available": true,
+      "normalized_portfolio": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "normalized_benchmark": {
+        "2026-08-05T00:00:00": 100.0
+      },
+      "relative_metrics": {
+        "available": false,
+        "n_days": 1,
+        "note": "Only 1 aligned day(s) \u2014 need at least 5 for a meaningful comparison."
+      },
+      "rolling_alpha_beta": {
+        "available": false,
+        "n_days": 1,
+        "note": "Need at least 21 aligned days for a 20-day rolling window; have 1."
+      }
+    }
+  }
+}
