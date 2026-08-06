@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T23:42:39.867252",
+  "generated_at": "2026-08-06T00:05:27.868034",
   "n_trades": 0,
   "cagr_pct": null,
   "annualized_return_pct": null,
@@ -15,16 +15,17 @@
   "largest_win": null,
   "largest_loss": null,
   "expectancy_per_trade": 0,
-  "exposure_pct": 0.43,
-  "cash_pct": 99.57,
+  "exposure_pct": 17.63,
+  "cash_pct": 82.37,
   "rolling_alpha_beta": {
     "available": false,
-    "n_days": 1,
-    "note": "Need at least 21 aligned days for a 20-day rolling window; have 1."
+    "n_days": 2,
+    "note": "Need at least 21 aligned days for a 20-day rolling window; have 2."
   },
   "total_return_pct": null,
   "total_pnl": 0,
   "avg_days_held": 0,
   "equity_history_sufficient": false,
-  "equity_history_note": "Only 0 day(s) of equity history spanned (need 3+) \u2014 CAGR/Sharpe/Sortino/MaxDD/Calmar withheld rather than reported from noise."
+  "equity_history_note": "Only 0 day(s) of equity history spanned (need 3+) \u2014 CAGR/Sharpe/Sortino/MaxDD/Calmar withheld rather than reported from noise.",
+  "as_of": "2026-08-06T00:05:23.036739"
 }

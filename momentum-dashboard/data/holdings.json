@@ -1,4 +1,76 @@
 {
-  "generated_at": "2026-08-05T23:42:39.688770",
-  "holdings": []
+  "generated_at": "2026-08-06T00:05:27.722972",
+  "holdings": [
+    {
+      "ticker": "LT.NS",
+      "company": "Larsen & Toubro",
+      "sector": "Industrials",
+      "entry_price": 4075.43,
+      "current_price": 4075.43,
+      "shares": 49,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 23.0
+    },
+    {
+      "ticker": "WIPRO.NS",
+      "company": "Wipro",
+      "sector": "Information Technology",
+      "entry_price": 186.37,
+      "current_price": 186.37,
+      "shares": 1021,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 21.92
+    },
+    {
+      "ticker": "HINDALCO.NS",
+      "company": "Hindalco Industries",
+      "sector": "Materials",
+      "entry_price": 1021.14,
+      "current_price": 1021.14,
+      "shares": 184,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 21.64
+    },
+    {
+      "ticker": "HCLTECH.NS",
+      "company": "HCL Technologies",
+      "sector": "Information Technology",
+      "entry_price": 1337.27,
+      "current_price": 1337.27,
+      "shares": 111,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 17.1
+    },
+    {
+      "ticker": "INFY.NS",
+      "company": "Infosys",
+      "sector": "Information Technology",
+      "entry_price": 1171.54,
+      "current_price": 1171.54,
+      "shares": 121,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 16.33
+    }
+  ],
+  "as_of": "2026-08-06T00:05:23.036739"
 }

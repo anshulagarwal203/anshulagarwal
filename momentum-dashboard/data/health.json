@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-05T23:42:42.119197",
+  "generated_at": "2026-08-06T00:05:28.561806",
   "overall_healthy": false,
   "scheduler": {
     "last_scan": null,
     "last_execute": null,
     "last_health_check": null,
-    "next_scheduled_run": "2026-08-05 at 16:00 IST (scan) / 09:00 IST (execute)"
+    "next_scheduled_run": "2026-08-06 at 16:00 IST (scan) / 09:00 IST (execute)"
   },
   "broker_connection": {
     "ok": false,
@@ -104,15 +104,15 @@
   },
   "automation_halted": false,
   "automation_halt_detail": "Not halted",
-  "last_successful_run": "2026-08-05T22:46:35.458952",
+  "last_successful_run": "2026-08-06T00:05:23.036739",
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.9h ago (2026-08-05T22:46:35.458952, phase=scan, mode=PAPER)"
+      "detail": "Last run 0.0h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
     },
     "positions_file": {
       "ok": true,
-      "detail": "No positions file (flat \u2014 fine if nothing is held)"
+      "detail": "india_swing_positions_paper.csv: 5 position(s)"
     },
     "halt_flags": {
       "ok": true,
@@ -124,7 +124,7 @@
     },
     "log_size": {
       "ok": true,
-      "detail": "0.03 MB total across daily logs"
+      "detail": "0.04 MB total across daily logs"
     },
     "package_versions": {
       "ok": true,
@@ -138,5 +138,6 @@
       "ok": false,
       "detail": "Failed: Access token file present"
     }
-  }
+  },
+  "as_of": "2026-08-06T00:05:23.036739"
 }
