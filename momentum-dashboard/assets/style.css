@@ -23,8 +23,39 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--accent); text-decoration: none; }
+/* Fixed, viewport-sized glow layer (not on body's own background) so it
+   never scrolls/repeats oddly, and stays subtle rather than a flat panel
+   of color — this alone is most of the difference between "a dashboard"
+   and something that feels like it has depth. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(760px circle at 12% -10%, rgba(79,140,255,0.10), transparent 55%),
+    radial-gradient(620px circle at 100% 0%, rgba(34,197,94,0.06), transparent 50%);
+  pointer-events: none;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
 a:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .kpi-card, .panel {
+    animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  /* Stagger by position so cards settle in one after another rather than
+     all popping at once — index within each grid/section, capped so a
+     long table page doesn't end with a multi-second last delay. */
+  .kpi-grid > *:nth-child(1), .panel:nth-of-type(1) { animation-delay: 0.02s; }
+  .kpi-grid > *:nth-child(2), .panel:nth-of-type(2) { animation-delay: 0.06s; }
+  .kpi-grid > *:nth-child(3), .panel:nth-of-type(3) { animation-delay: 0.10s; }
+  .kpi-grid > *:nth-child(4), .panel:nth-of-type(4) { animation-delay: 0.14s; }
+  .kpi-grid > *:nth-child(5), .panel:nth-of-type(5) { animation-delay: 0.18s; }
+  .kpi-grid > *:nth-child(n+6) { animation-delay: 0.20s; }
+}
 
 .topbar {
   display: flex;
@@ -57,8 +88,9 @@ nav.tabs a {
   border-radius: 8px;
   font-size: 0.86rem;
   font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
-nav.tabs a:hover { background: rgba(255,255,255,0.05); text-decoration: none; color: var(--text); }
+nav.tabs a:hover { background: rgba(255,255,255,0.05); text-decoration: none; color: var(--text); transform: translateY(-1px); }
 nav.tabs a.active { background: var(--card); color: var(--text); border: 1px solid var(--border); }
 
 .mode-banner {
@@ -93,7 +125,9 @@ h2 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--text); border-bottom: 
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px 18px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
+.kpi-card:hover { transform: translateY(-2px); border-color: rgba(79,140,255,0.4); box-shadow: 0 8px 24px -12px rgba(0,0,0,0.5); }
 .kpi-card .label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .kpi-card .value { font-size: 1.45rem; font-weight: 700; margin-top: 6px; font-variant-numeric: tabular-nums; }
 .kpi-card .value.pos { color: var(--green); }
@@ -106,7 +140,9 @@ h2 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--text); border-bottom: 
   border-radius: var(--radius);
   padding: 20px;
   margin-bottom: 20px;
+  transition: border-color 0.2s ease;
 }
+.panel:hover { border-color: rgba(255,255,255,0.14); }
 .panel h3 { margin: 0 0 14px; font-size: 0.95rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em; }
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -116,8 +152,11 @@ h2 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--text); border-bottom: 
 table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
 th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
 th { color: var(--text-muted); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; }
-tbody tr:hover { background: rgba(255,255,255,0.03); }
+tbody tr { transition: background-color 0.12s ease; }
+tbody tr:hover { background: rgba(255,255,255,0.04); }
 .table-scroll { overflow-x: auto; }
+
+canvas { cursor: crosshair; }
 
 .pos { color: var(--green); } .neg { color: var(--red); } .muted { color: var(--text-muted); }
 

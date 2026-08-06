@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-08-06T14:53:04.207163",
+  "available": true,
+  "source": "US Treasury (home.treasury.gov) - Daily Treasury Par Yield Curve Rates",
+  "as_of_date": "08/06/2026",
+  "points": [
+    {
+      "maturity": "1M",
+      "months": 1,
+      "yield_pct": 3.8,
+      "change_bps": 3.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "3M",
+      "months": 3,
+      "yield_pct": 3.9,
+      "change_bps": 1.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "6M",
+      "months": 6,
+      "yield_pct": 3.99,
+      "change_bps": 1.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "1Y",
+      "months": 12,
+      "yield_pct": 4.06,
+      "change_bps": 3.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "2Y",
+      "months": 24,
+      "yield_pct": 4.25,
+      "change_bps": 7.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "3Y",
+      "months": 36,
+      "yield_pct": 4.31,
+      "change_bps": 7.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "5Y",
+      "months": 60,
+      "yield_pct": 4.4,
+      "change_bps": 7.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "7Y",
+      "months": 84,
+      "yield_pct": 4.53,
+      "change_bps": 6.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "10Y",
+      "months": 120,
+      "yield_pct": 4.69,
+      "change_bps": 6.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "20Y",
+      "months": 240,
+      "yield_pct": 5.22,
+      "change_bps": 4.0,
+      "as_of": "08/06/2026"
+    },
+    {
+      "maturity": "30Y",
+      "months": 360,
+      "yield_pct": 5.22,
+      "change_bps": 5.0,
+      "as_of": "08/06/2026"
+    }
+  ],
+  "spread_10y_2y_bps": 44.0,
+  "curve_inverted_10y_2y": false,
+  "as_of": "2026-08-06T00:05:23.036739"
+}

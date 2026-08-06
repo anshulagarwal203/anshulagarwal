@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-06T00:05:28.561806",
-  "overall_healthy": false,
+  "generated_at": "2026-08-06T14:53:04.072326",
+  "overall_healthy": true,
   "scheduler": {
     "last_scan": null,
     "last_execute": null,
-    "last_health_check": null,
+    "last_health_check": "2026-08-06T13:04:41.957747",
     "next_scheduled_run": "2026-08-06 at 16:00 IST (scan) / 09:00 IST (execute)"
   },
   "broker_connection": {
-    "ok": false,
-    "detail": "Failed: Access token file present"
+    "ok": true,
+    "detail": "All Kite checks passed"
   },
   "authentication_status": {
     "name": "Authentication",
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
+      "detail": "Last run 14.8h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
     },
     "positions_file": {
       "ok": true,
@@ -120,7 +120,7 @@
     },
     "disk_usage": {
       "ok": true,
-      "detail": "207.0 GB free"
+      "detail": "205.4 GB free"
     },
     "log_size": {
       "ok": true,
@@ -135,8 +135,8 @@
       "detail": "Yahoo Finance reachable"
     },
     "broker_connection": {
-      "ok": false,
-      "detail": "Failed: Access token file present"
+      "ok": true,
+      "detail": "All Kite checks passed"
     }
   },
   "as_of": "2026-08-06T00:05:23.036739"

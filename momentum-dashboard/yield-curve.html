@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — US Treasury Yield Curve</title>
+<meta name="description" content="Live US Treasury par yield curve, for macro context alongside the India Momentum Trader paper portfolio.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
+<div class="topbar">
+  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
+  <nav class="tabs" id="nav-tabs"></nav>
+</div>
+<main>
+  <h1>US Treasury Yield Curve</h1>
+  <p class="subtitle" id="generated-at">Loading…</p>
+  <div class="read-only-banner">Reference/macro context only — not part of the India strategy's signals. Source: US Treasury Department (home.treasury.gov), fetched daily alongside the rest of this site's data.</div>
+
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="panel">
+    <h3>Par Yield Curve — All Maturities</h3>
+    <canvas id="yield-canvas" style="width:100%; height:340px;"></canvas>
+  </div>
+
+  <div class="panel" id="table-panel" style="display:none;">
+    <h3>By Maturity</h3>
+    <div class="table-scroll">
+      <table><thead><tr><th>Maturity</th><th>Yield</th><th>Change (1d)</th></tr></thead>
+      <tbody id="yield-table-body"></tbody></table>
+    </div>
+  </div>
+</main>
+<script src="assets/app.js"></script>
+<script>
+(async function () {
+  renderNav("yield-curve.html");
+  const yc = await fetchJSON("yield_curve.json");
+
+  document.getElementById("generated-at").textContent = yc && yc.available
+    ? `Last Updated: ${fmtDate(yc.as_of ?? yc.generated_at)} · Treasury data as of ${yc.as_of_date ?? "—"}`
+    : "No data yet.";
+
+  const kpiGrid = document.getElementById("kpi-grid");
+  if (!yc || !yc.available) {
+    kpiGrid.innerHTML = emptyState("Yield curve data unavailable right now — Treasury.gov may be temporarily unreachable. Retried automatically on the next scheduled run.");
+    return;
+  }
+
+  const tenY = yc.points.find(p => p.maturity === "10Y");
+  const twoY = yc.points.find(p => p.maturity === "2Y");
+  const thirtyY = yc.points.find(p => p.maturity === "30Y");
+  const threeM = yc.points.find(p => p.maturity === "3M");
+
+  const cards = [
+    { label: "10-Year", value: tenY ? tenY.yield_pct.toFixed(2) + "%" : "—" },
+    { label: "2-Year", value: twoY ? twoY.yield_pct.toFixed(2) + "%" : "—" },
+    { label: "3-Month", value: threeM ? threeM.yield_pct.toFixed(2) + "%" : "—" },
+    { label: "30-Year", value: thirtyY ? thirtyY.yield_pct.toFixed(2) + "%" : "—" },
+    { label: "10Y − 2Y Spread", value: yc.spread_10y_2y_bps !== null ? `${yc.spread_10y_2y_bps > 0 ? "+" : ""}${yc.spread_10y_2y_bps} bps` : "—",
+      cls: yc.spread_10y_2y_bps !== null ? (yc.spread_10y_2y_bps < 0 ? "neg" : "pos") : "" },
+    { label: "Curve Status", value: yc.curve_inverted_10y_2y === null ? "—" : (yc.curve_inverted_10y_2y ? "Inverted" : "Normal"),
+      cls: yc.curve_inverted_10y_2y ? "neg" : "pos" },
+  ];
+  kpiGrid.innerHTML = cards.map(c => `
+    <div class="kpi-card"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
+
+  yieldCurveChart("yield-canvas", yc.points, { color: "#4f8cff" });
+
+  document.getElementById("table-panel").style.display = "";
+  document.getElementById("yield-table-body").innerHTML = yc.points.map(p => `
+    <tr><td>${p.maturity}</td>
+      <td>${p.yield_pct !== null ? p.yield_pct.toFixed(2) + "%" : "—"}</td>
+      <td class="${p.change_bps > 0 ? "pos" : p.change_bps < 0 ? "neg" : "muted"}">${p.change_bps !== null ? (p.change_bps > 0 ? "+" : "") + p.change_bps + " bps" : "—"}</td>
+    </tr>`).join("");
+})();
+</script>
+</body>
+</html>
