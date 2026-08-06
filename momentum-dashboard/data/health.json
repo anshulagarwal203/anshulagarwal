@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T14:53:04.072326",
+  "generated_at": "2026-08-06T14:58:49.072405",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": null,
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 14.8h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
+      "detail": "Last run 14.9h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
     },
     "positions_file": {
       "ok": true,

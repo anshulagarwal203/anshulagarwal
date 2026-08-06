@@ -187,6 +187,107 @@ canvas { max-width: 100%; }
 .pdf-list li:last-child { border-bottom: none; }
 .pdf-list a.download { font-size: 0.82rem; }
 
+/* ── Fund overview hero (index.html) — mirrors the "AI Fund Overview"
+   layout pattern: headline value, day-vs-benchmark and since-inception
+   -vs-benchmark comparisons side by side, excess return called out on
+   its own. ─────────────────────────────────────────────────────────── */
+.fund-hero { margin-bottom: 8px; }
+.market-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; color: var(--text-muted); font-weight: 600;
+  padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+}
+.market-status .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.market-status.closed .live-dot { background: var(--text-muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .market-status:not(.closed) .live-dot { animation: pulseDot 1.8s ease-in-out infinite; }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+}
+
+.hero-value { font-size: 2.6rem; font-weight: 800; margin: 10px 0 2px; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.hero-sub { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr 0.7fr; gap: 12px; margin-bottom: 8px; }
+@media (max-width: 760px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 18px; transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+.compare-card:hover { border-color: rgba(79,140,255,0.35); transform: translateY(-2px); }
+.compare-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+.compare-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; font-size: 0.92rem; }
+.compare-row .compare-name { color: var(--text-muted); }
+.compare-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+.compare-card.excess { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.excess-val { font-size: 1.9rem; font-weight: 800; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+/* ── Position rows (index.html "Current Portfolio") — compact
+   ticker/shares/price/value/day-change/weight line, denser and more
+   scannable than a full table for a short holdings list. ────────────── */
+.position-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.position-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.1fr 0.7fr;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  transition: background-color 0.15s ease;
+}
+.position-row:hover { background: var(--bg-elevated); }
+.position-row.cash-row { grid-template-columns: 1.4fr 1fr 1.1fr 0.7fr; }
+.position-ticker { display: flex; flex-direction: column; gap: 2px; }
+.position-ticker a { font-weight: 700; font-size: 0.98rem; }
+.position-company { color: var(--text-muted); font-size: 0.76rem; }
+.position-mid { display: flex; flex-direction: column; gap: 2px; font-size: 0.82rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.position-value { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.position-change { display: block; font-size: 0.78rem; font-weight: 600; margin-top: 2px; }
+.position-weight { text-align: right; color: var(--text-muted); font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .position-row { grid-template-columns: 1fr 1fr; row-gap: 6px; }
+  .position-weight { text-align: left; }
+}
+
+/* ── Trade cards (trades.html) — BUY/SELL badge, real mechanical reason
+   (not fabricated narrative), bought->sold flow for closed trades. ──── */
+.trade-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; margin-bottom: 14px; transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+.trade-card:hover { border-color: rgba(255,255,255,0.16); transform: translateY(-1px); }
+.trade-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.trade-badge { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; padding: 3px 10px; border-radius: 6px; }
+.trade-badge.buy { background: rgba(34,197,94,0.15); color: var(--green); }
+.trade-badge.sell { background: rgba(79,140,255,0.15); color: var(--accent); }
+.trade-date { color: var(--text-muted); font-size: 0.8rem; }
+.trade-ticker { font-weight: 700; font-size: 1.02rem; }
+.trade-company { color: var(--text-muted); font-size: 0.85rem; }
+.trade-headline-val { margin-left: auto; text-align: right; font-weight: 800; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.trade-headline-sub { color: var(--text-muted); font-size: 0.78rem; text-align: right; }
+
+.trade-reason-label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.trade-reason-text { font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px; }
+
+.roundtrip { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; margin-bottom: 12px; flex-wrap: wrap; }
+.roundtrip .rt-leg { display: flex; flex-direction: column; }
+.roundtrip .rt-leg .rt-label { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.roundtrip .rt-leg .rt-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+.roundtrip .rt-arrow { color: var(--text-muted); }
+
+.trade-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; padding-top: 12px; border-top: 1px solid var(--border); }
+.trade-stat .label { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.trade-stat .value { font-size: 0.9rem; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+.trade-filter { display: flex; gap: 8px; margin-bottom: 16px; }
+.trade-filter button {
+  background: var(--card); border: 1px solid var(--border); color: var(--text-muted);
+  padding: 6px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  transition: all 0.15s ease;
+}
+.trade-filter button:hover { color: var(--text); border-color: rgba(79,140,255,0.4); }
+.trade-filter button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
 @media (max-width: 640px) {
   main { padding: 16px; }
   .topbar { padding: 12px 16px; }

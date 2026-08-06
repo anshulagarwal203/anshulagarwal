@@ -389,6 +389,37 @@ function yieldCurveChart(canvasId, points, opts = {}) {
   canvas.addEventListener("mouseleave", () => render());
 }
 
+function parseExitReason(reason) {
+  /* Turns swing_trader.py's compact machine-readable exit reason strings
+     (e.g. "stop_touch(1105.82)", "time_stop(11d)") into a real, honest
+     sentence describing what actually happened - no invented narrative,
+     just the same mechanical rule spelled out in words. */
+  if (!reason) return { label: "Exit", sentence: "No exit reason recorded." };
+  let m;
+  if ((m = reason.match(/^stop_touch\(([\d.]+)\)$/)))
+    return { label: "Stop-loss", sentence: `Stop-loss triggered: price touched the ₹${Number(m[1]).toLocaleString("en-IN")} stop level.` };
+  if ((m = reason.match(/^target_touch\(([\d.]+)\)$/)))
+    return { label: "Target hit", sentence: `Profit target reached: price touched the ₹${Number(m[1]).toLocaleString("en-IN")} target level.` };
+  if ((m = reason.match(/^rsi_overbought\(([\d.]+)\)$/)))
+    return { label: "RSI overbought", sentence: `Momentum exhaustion signal: RSI reached ${m[1]}, above the overbought threshold.` };
+  if ((m = reason.match(/^roc_breakdown_(\d+)d\(ROC=([+\-\d.]+)%\)$/)))
+    return { label: "Momentum breakdown", sentence: `Rate-of-change turned negative for ${m[1]} consecutive day(s) (latest ROC ${m[2]}%) — momentum signal broke down.` };
+  if ((m = reason.match(/^time_stop\((\d+)d\)$/)))
+    return { label: "Time stop", sentence: `Maximum hold period reached (${m[1]} days) — position closed regardless of price action.` };
+  return { label: "Exit", sentence: reason };
+}
+
+function entryThesis(h) {
+  /* Same discipline for open positions - real signal values from the
+     entry-time screen (ROC/RSI/momentum rank), not fabricated commentary. */
+  const parts = [];
+  if (h.roc_pct !== null && h.roc_pct !== undefined) parts.push(`ROC ${h.roc_pct > 0 ? "+" : ""}${h.roc_pct.toFixed(1)}%`);
+  if (h.rsi !== null && h.rsi !== undefined) parts.push(`RSI ${h.rsi.toFixed(1)}`);
+  if (h.momentum_rank !== null && h.momentum_rank !== undefined) parts.push(`ranked #${h.momentum_rank} by momentum`);
+  if (!parts.length) return "Momentum entry signal (ROC/RSI threshold) triggered at entry.";
+  return `Entered on a momentum signal: ${parts.join(", ")}.`;
+}
+
 function seriesFromDict(dict) {
   if (!dict) return [];
   return Object.entries(dict)

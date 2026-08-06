@@ -14,40 +14,94 @@
   <nav class="tabs" id="nav-tabs"></nav>
 </div>
 <main>
-  <h1>Portfolio Overview</h1>
-  <p class="subtitle" id="generated-at">Loading…</p>
   <div class="read-only-banner">Read-only. This page never executes trades — it only displays data generated after each paper trading session by the India Momentum Trader strategy.</div>
+
+  <div class="fund-hero">
+    <span class="market-status closed" id="market-status">Loading…</span>
+    <h1>Portfolio Overview</h1>
+    <div class="hero-value" id="hero-value">Loading…</div>
+    <p class="hero-sub" id="hero-sub"></p>
+
+    <div class="compare-grid" id="compare-grid" style="display:none;">
+      <div class="compare-card">
+        <div class="compare-label">Last Trading Session</div>
+        <div class="compare-row"><span class="compare-name">Portfolio</span><span class="compare-val" id="ltd-port"></span></div>
+        <div class="compare-row"><span class="compare-name" id="ltd-bench-name">Benchmark</span><span class="compare-val" id="ltd-bench"></span></div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Since Inception</div>
+        <div class="compare-row"><span class="compare-name">Portfolio</span><span class="compare-val" id="overall-port"></span></div>
+        <div class="compare-row"><span class="compare-name" id="overall-bench-name">Benchmark</span><span class="compare-val" id="overall-bench"></span></div>
+      </div>
+      <div class="compare-card excess">
+        <div class="compare-label">Excess Return</div>
+        <div class="excess-val" id="excess-val"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="kpi-grid" id="kpi-grid"></div>
 
-  <p class="subtitle" id="insufficient-note" style="display:none;"></p>
+  <h2>Current Portfolio</h2>
+  <div class="position-list" id="position-list"></div>
+
+  <p class="subtitle" id="insufficient-note" style="display:none; margin-top:16px;"></p>
 </main>
 <script src="assets/app.js"></script>
 <script>
 (async function () {
   renderNav("index.html");
-  const portfolio = await fetchJSON("portfolio.json");
+  const [portfolio, holdings] = await Promise.all([fetchJSON("portfolio.json"), fetchJSON("holdings.json")]);
 
-  document.getElementById("generated-at").textContent = portfolio
+  document.getElementById("hero-sub").textContent = portfolio
     ? `Last Updated: ${fmtDate(portfolio.as_of)} (paper trading run)`
     : "No data yet — the dashboard updates after the next paper trading session.";
 
-  const kpiGrid = document.getElementById("kpi-grid");
+  const statusEl = document.getElementById("market-status");
+  statusEl.innerHTML = `<span class="live-dot"></span> ${portfolio ? "PAPER" : "—"} · Updated ${portfolio ? fmtDate(portfolio.as_of) : "—"}`;
+
   if (!portfolio) {
-    kpiGrid.innerHTML = emptyState("No portfolio.json yet.");
+    document.getElementById("hero-value").textContent = "—";
+    document.getElementById("kpi-grid").innerHTML = emptyState("No portfolio.json yet.");
+    document.getElementById("position-list").innerHTML = emptyState("No positions yet.");
     return;
   }
 
+  document.getElementById("hero-value").textContent = fmtCurrency(portfolio.portfolio_value);
+
+  const bc = portfolio.benchmark_comparison;
+  if (bc && bc.available) {
+    document.getElementById("compare-grid").style.display = "";
+    document.getElementById("ltd-bench-name").textContent = bc.benchmark_name;
+    document.getElementById("overall-bench-name").textContent = bc.benchmark_name;
+
+    const ltdPort = document.getElementById("ltd-port");
+    ltdPort.textContent = bc.portfolio_daily_pct !== null ? fmtPct(bc.portfolio_daily_pct) : "—";
+    ltdPort.className = "compare-val " + signClass(bc.portfolio_daily_pct);
+    const ltdBench = document.getElementById("ltd-bench");
+    ltdBench.textContent = fmtPct(bc.benchmark_daily_pct);
+    ltdBench.className = "compare-val " + signClass(bc.benchmark_daily_pct);
+
+    const ovPort = document.getElementById("overall-port");
+    ovPort.textContent = bc.portfolio_since_inception_pct !== null ? fmtPct(bc.portfolio_since_inception_pct) : "—";
+    ovPort.className = "compare-val " + signClass(bc.portfolio_since_inception_pct);
+    const ovBench = document.getElementById("overall-bench");
+    ovBench.textContent = bc.benchmark_since_inception_pct !== null ? fmtPct(bc.benchmark_since_inception_pct) : "—";
+    ovBench.className = "compare-val " + signClass(bc.benchmark_since_inception_pct);
+
+    const excessEl = document.getElementById("excess-val");
+    excessEl.textContent = bc.excess_return_pct !== null ? fmtPct(bc.excess_return_pct) : "—";
+    excessEl.className = "excess-val " + signClass(bc.excess_return_pct);
+  }
+
+  const kpiGrid = document.getElementById("kpi-grid");
   const cards = [
-    { label: "Paper Portfolio Value", value: fmtCurrency(portfolio.portfolio_value) },
-    { label: "Daily Return", value: portfolio.today_return ? fmtPct(portfolio.today_return.change_pct) : "—", cls: portfolio.today_return ? signClass(portfolio.today_return.change_pct) : "" },
     { label: "Weekly Return", value: portfolio.weekly_return ? fmtPct(portfolio.weekly_return.change_pct) : "—", cls: portfolio.weekly_return ? signClass(portfolio.weekly_return.change_pct) : "" },
     { label: "Monthly Return", value: portfolio.monthly_return ? fmtPct(portfolio.monthly_return.change_pct) : "—", cls: portfolio.monthly_return ? signClass(portfolio.monthly_return.change_pct) : "" },
     { label: "YTD Return", value: portfolio.ytd_return ? fmtPct(portfolio.ytd_return.change_pct) : "—", cls: portfolio.ytd_return ? signClass(portfolio.ytd_return.change_pct) : "" },
     { label: "CAGR", value: portfolio.cagr_pct !== null ? fmtPct(portfolio.cagr_pct) : "insufficient history" },
     { label: "Current Cash", value: fmtCurrency(portfolio.cash) },
     { label: "Invested Capital", value: fmtCurrency(portfolio.invested_capital) },
-    { label: "Number of Holdings", value: portfolio.num_holdings },
     { label: "Open P&L", value: fmtCurrency(portfolio.open_pnl), cls: signClass(portfolio.open_pnl) },
     { label: "Closed P&L", value: fmtCurrency(portfolio.closed_pnl), cls: signClass(portfolio.closed_pnl) },
     { label: "Win Rate", value: fmtPct(portfolio.win_rate_pct, 1) },
@@ -57,6 +111,35 @@
   ];
   kpiGrid.innerHTML = cards.map(c => `
     <div class="kpi-card"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
+
+  const posList = document.getElementById("position-list");
+  const hRows = (holdings && holdings.holdings) || [];
+  if (!hRows.length) {
+    posList.innerHTML = emptyState("No open positions.");
+  } else {
+    posList.innerHTML = hRows.map(h => `
+      <div class="position-row">
+        <div class="position-ticker">
+          <a href="holdings.html">${h.ticker.replace(".NS", "")}</a>
+          <span class="position-company">${h.company || h.sector || ""}</span>
+        </div>
+        <div class="position-mid">
+          <span>${h.shares} shares</span>
+          <span>Current: ${fmtCurrency(h.current_price, 2)}</span>
+        </div>
+        <div class="position-value">
+          ${fmtCurrency(h.current_price * h.shares)}
+          <span class="position-change ${signClass(h.current_return_pct)}">${fmtPct(h.current_return_pct)}</span>
+        </div>
+        <div class="position-weight">${h.weight_pct !== null ? h.weight_pct.toFixed(1) + "%" : "—"}</div>
+      </div>`).join("") + `
+      <div class="position-row cash-row">
+        <div class="position-ticker"><span style="font-weight:700;">Cash</span><span class="position-company">Liquidity</span></div>
+        <div class="position-mid"></div>
+        <div class="position-value">${fmtCurrency(portfolio.cash)}</div>
+        <div class="position-weight">${portfolio.portfolio_value ? (portfolio.cash / portfolio.portfolio_value * 100).toFixed(1) + "%" : "—"}</div>
+      </div>`;
+  }
 
   if (!portfolio.equity_history_sufficient) {
     document.getElementById("insufficient-note").style.display = "block";
