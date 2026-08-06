@@ -24,7 +24,7 @@
   const stats = await fetchJSON("statistics.json");
 
   document.getElementById("generated-at").textContent = stats
-    ? `Generated ${fmtDate(stats.generated_at)}`
+    ? `Last Updated: ${fmtDate(stats.as_of)} (paper trading run)`
     : "No data yet.";
 
   const c = document.getElementById("stats-container");

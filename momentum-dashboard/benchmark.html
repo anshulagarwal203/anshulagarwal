@@ -24,7 +24,7 @@
   const bench = await fetchJSON("benchmark.json");
 
   document.getElementById("generated-at").textContent = bench
-    ? `Generated ${fmtDate(bench.generated_at)} — normalized to 100 on Day 1.`
+    ? `Last Updated: ${fmtDate(bench.as_of)} (paper trading run) — normalized to 100 on Day 1.`
     : "No data yet.";
 
   const container = document.getElementById("benchmarks-container");

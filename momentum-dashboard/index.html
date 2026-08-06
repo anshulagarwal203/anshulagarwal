@@ -29,7 +29,7 @@
   const portfolio = await fetchJSON("portfolio.json");
 
   document.getElementById("generated-at").textContent = portfolio
-    ? `Generated ${fmtDate(portfolio.generated_at)}`
+    ? `Last Updated: ${fmtDate(portfolio.as_of)} (paper trading run)`
     : "No data yet — the dashboard updates after the next paper trading session.";
 
   const kpiGrid = document.getElementById("kpi-grid");

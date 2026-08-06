@@ -35,7 +35,7 @@
   const trades = await fetchJSON("trades.json");
 
   document.getElementById("generated-at").textContent = trades
-    ? `Generated ${fmtDate(trades.generated_at)} — ${trades.trades.length} completed paper trade(s)`
+    ? `Last Updated: ${fmtDate(trades.as_of)} (paper trading run) — ${trades.trades.length} completed paper trade(s)`
     : "No data yet.";
 
   const body = document.getElementById("trades-body");

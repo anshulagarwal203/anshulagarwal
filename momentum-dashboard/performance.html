@@ -32,7 +32,7 @@
   const perf = await fetchJSON("performance.json");
 
   document.getElementById("generated-at").textContent = perf
-    ? `Generated ${fmtDate(perf.generated_at)} — extends automatically after every completed trading day.`
+    ? `Last Updated: ${fmtDate(perf.as_of)} (paper trading run) — extends automatically after every completed trading day.`
     : "No data yet.";
 
   if (!perf || !perf.available) {

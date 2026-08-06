@@ -35,7 +35,7 @@
   const holdings = await fetchJSON("holdings.json");
 
   document.getElementById("generated-at").textContent = holdings
-    ? `Generated ${fmtDate(holdings.generated_at)} — ${holdings.holdings.length} position(s)`
+    ? `Last Updated: ${fmtDate(holdings.as_of)} (paper trading run) — ${holdings.holdings.length} position(s)`
     : "No data yet.";
 
   const body = document.getElementById("holdings-body");

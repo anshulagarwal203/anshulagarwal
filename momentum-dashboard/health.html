@@ -24,7 +24,7 @@
   const h = await fetchJSON("health.json");
 
   document.getElementById("generated-at").textContent = h
-    ? `Generated ${fmtDate(h.generated_at)}`
+    ? `Last Updated: ${fmtDate(h.as_of)} (paper trading run)`
     : "No data yet.";
 
   const c = document.getElementById("health-container");

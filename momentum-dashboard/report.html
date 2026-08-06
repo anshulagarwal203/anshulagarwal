@@ -29,7 +29,7 @@
   const r = await fetchJSON("latest_report.json");
 
   document.getElementById("generated-at").textContent = r
-    ? `As of ${fmtDate(r.as_of)} — mode: ${r.mode}, phase: ${r.phase ?? "n/a"}`
+    ? `Last Updated: ${fmtDate(r.as_of)} (paper trading run) — mode: ${r.mode}, phase: ${r.phase ?? "n/a"}`
     : "No data yet.";
 
   const c = document.getElementById("report-container");
