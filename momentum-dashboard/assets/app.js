@@ -23,6 +23,33 @@ function renderNav(activeHref) {
       (p) => `<a href="${p.href}" class="${p.href === activeHref ? "active" : ""}">${p.label}</a>`
     ).join("");
   }
+  updateModeBanner();
+}
+
+async function updateModeBanner() {
+  /* Reads the real mode (PAPER or LIVE) from data/health.json - every
+     JSON file carries the same "mode" field (see json_export.py's
+     generate_all()) so any of them would work; this one is small and
+     always generated. Note: this repo's data/ renames system_health.json
+     -> health.json at publish time (see json_export.py's external-target
+     branch) - health.html already fetches "health.json" for the same
+     reason. Replaces the old hardcoded "MODE: PAPER TRADING - no real
+     orders, ever, on this site" text, which stayed on screen unchanged
+     regardless of the actual SWING_LIVE_ENABLED state. */
+  const banner = document.querySelector(".mode-banner");
+  if (!banner) return;
+  const health = await fetchJSON("health.json");
+  const mode = (health && health.mode) ? String(health.mode).toUpperCase() : null;
+  if (mode === "LIVE") {
+    banner.textContent = "MODE: LIVE TRADING — real orders, real capital, via Zerodha Kite Connect";
+    banner.classList.add("live");
+  } else if (mode === "PAPER") {
+    banner.textContent = "MODE: PAPER TRADING — no real orders, ever, on this site";
+    banner.classList.remove("live");
+  } else {
+    banner.textContent = "MODE: UNKNOWN — could not confirm paper/live status from data";
+    banner.classList.add("live");
+  }
 }
 
 async function fetchJSON(name) {

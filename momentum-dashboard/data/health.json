@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T14:58:49.072405",
+  "generated_at": "2026-08-06T15:06:50.111310",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": null,
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 14.9h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
+      "detail": "Last run 15.0h ago (2026-08-06T00:05:23.036739, phase=execute, mode=PAPER)"
     },
     "positions_file": {
       "ok": true,
@@ -139,5 +139,6 @@
       "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-06T00:05:23.036739"
+  "as_of": "2026-08-06T00:05:23.036739",
+  "mode": "PAPER"
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T14:58:43.060304",
+  "generated_at": "2026-08-06T15:06:44.693342",
   "n_trades": 0,
   "cagr_pct": null,
   "annualized_return_pct": null,
@@ -27,5 +27,6 @@
   "avg_days_held": 0,
   "equity_history_sufficient": false,
   "equity_history_note": "Only 0 day(s) of equity history spanned (need 3+) \u2014 CAGR/Sharpe/Sortino/MaxDD/Calmar withheld rather than reported from noise.",
-  "as_of": "2026-08-06T00:05:23.036739"
+  "as_of": "2026-08-06T00:05:23.036739",
+  "mode": "PAPER"
 }
