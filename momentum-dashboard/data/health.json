@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T19:41:42.799331",
+  "generated_at": "2026-08-10T19:44:11.037298",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": null,
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-10T19:40:29.014251, phase=scan, mode=LIVE)"
+      "detail": "Last run 0.0h ago (2026-08-10T19:43:03.450081, phase=scan, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
@@ -120,11 +120,11 @@
     },
     "disk_usage": {
       "ok": true,
-      "detail": "206.2 GB free"
+      "detail": "206.4 GB free"
     },
     "log_size": {
       "ok": true,
-      "detail": "0.09 MB total across daily logs"
+      "detail": "0.10 MB total across daily logs"
     },
     "package_versions": {
       "ok": true,
