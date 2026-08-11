@@ -1,88 +1,88 @@
 {
-  "generated_at": "2026-08-06T15:06:50.484716",
+  "generated_at": "2026-08-10T19:41:43.287012",
   "available": true,
   "source": "US Treasury (home.treasury.gov) - Daily Treasury Par Yield Curve Rates",
-  "as_of_date": "08/06/2026",
+  "as_of_date": "08/10/2026",
   "points": [
     {
       "maturity": "1M",
       "months": 1,
-      "yield_pct": 3.8,
-      "change_bps": 3.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 3.79,
+      "change_bps": 0.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "3M",
       "months": 3,
-      "yield_pct": 3.9,
-      "change_bps": 1.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 3.89,
+      "change_bps": 2.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "6M",
       "months": 6,
-      "yield_pct": 3.99,
-      "change_bps": 1.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 4.0,
+      "change_bps": 4.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "1Y",
       "months": 12,
-      "yield_pct": 4.06,
+      "yield_pct": 4.04,
       "change_bps": 3.0,
-      "as_of": "08/06/2026"
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "2Y",
       "months": 24,
       "yield_pct": 4.25,
-      "change_bps": 7.0,
-      "as_of": "08/06/2026"
+      "change_bps": 6.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "3Y",
       "months": 36,
       "yield_pct": 4.31,
-      "change_bps": 7.0,
-      "as_of": "08/06/2026"
+      "change_bps": 6.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "5Y",
       "months": 60,
-      "yield_pct": 4.4,
-      "change_bps": 7.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 4.41,
+      "change_bps": 6.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "7Y",
       "months": 84,
-      "yield_pct": 4.53,
-      "change_bps": 6.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 4.56,
+      "change_bps": 7.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "10Y",
       "months": 120,
-      "yield_pct": 4.69,
-      "change_bps": 6.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 4.72,
+      "change_bps": 7.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "20Y",
       "months": 240,
-      "yield_pct": 5.22,
-      "change_bps": 4.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 5.25,
+      "change_bps": 5.0,
+      "as_of": "08/10/2026"
     },
     {
       "maturity": "30Y",
       "months": 360,
-      "yield_pct": 5.22,
-      "change_bps": 5.0,
-      "as_of": "08/06/2026"
+      "yield_pct": 5.25,
+      "change_bps": 6.0,
+      "as_of": "08/10/2026"
     }
   ],
-  "spread_10y_2y_bps": 44.0,
+  "spread_10y_2y_bps": 47.0,
   "curve_inverted_10y_2y": false,
   "as_of": "2026-08-06T00:05:23.036739",
   "mode": "PAPER"

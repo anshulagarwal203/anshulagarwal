@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T15:06:44.693342",
+  "generated_at": "2026-08-10T19:41:39.929350",
   "n_trades": 0,
   "cagr_pct": null,
   "annualized_return_pct": null,
@@ -19,8 +19,8 @@
   "cash_pct": 82.37,
   "rolling_alpha_beta": {
     "available": false,
-    "n_days": 1,
-    "note": "Need at least 21 aligned days for a 20-day rolling window; have 1."
+    "n_days": 2,
+    "note": "Need at least 21 aligned days for a 20-day rolling window; have 2."
   },
   "total_return_pct": null,
   "total_pnl": 0,
