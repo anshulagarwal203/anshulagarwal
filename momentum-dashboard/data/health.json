@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-10T19:44:11.037298",
+  "generated_at": "2026-08-11T00:06:18.992722",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": null,
     "last_execute": null,
-    "last_health_check": "2026-08-10T19:41:36.463575",
-    "next_scheduled_run": "2026-08-10 at 16:00 IST (scan) / 09:00 IST (execute)"
+    "last_health_check": "2026-08-11T00:06:10.897900",
+    "next_scheduled_run": "2026-08-11 at 16:00 IST (scan) / 09:00 IST (execute)"
   },
   "broker_connection": {
     "ok": true,
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-10T19:43:03.450081, phase=scan, mode=LIVE)"
+      "detail": "Last run 0.2h ago (2026-08-10T23:54:07.139004, phase=scan, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
@@ -120,11 +120,11 @@
     },
     "disk_usage": {
       "ok": true,
-      "detail": "206.4 GB free"
+      "detail": "206.1 GB free"
     },
     "log_size": {
       "ok": true,
-      "detail": "0.10 MB total across daily logs"
+      "detail": "0.27 MB total across daily logs"
     },
     "package_versions": {
       "ok": true,
