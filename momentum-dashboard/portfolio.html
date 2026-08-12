@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Momentum Dashboard — Holdings</title>
+<title>Momentum Dashboard — Portfolio Composition</title>
 <link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
@@ -26,40 +26,62 @@
       <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
     </div>
     <main class="content">
-      <h1>Current Holdings</h1>
+      <h1>Portfolio Composition</h1>
       <p class="subtitle" id="generated-at">Loading…</p>
-      <div class="panel fade-in"><div id="holdings-table"></div></div>
+
+      <h2>Sector Allocation</h2>
+      <div class="panel fade-in"><div id="sector-alloc"></div></div>
+
+      <h2>Holding Weights</h2>
+      <div class="panel fade-in"><div id="holding-alloc"></div></div>
+
+      <h2>Cash vs. Invested</h2>
+      <div class="panel fade-in"><div id="cash-alloc"></div></div>
     </main>
   </div>
 </div>
 <script src="assets/app.js?v=2"></script>
 <script>
 (async function () {
-  renderShell("holdings.html");
-  const holdings = await fetchJSON("holdings.json");
+  renderShell("portfolio.html");
+  const [holdings, portfolio] = await Promise.all([fetchJSON("holdings.json"), fetchJSON("portfolio.json")]);
 
   document.getElementById("generated-at").textContent = holdings
-    ? `Last Updated: ${fmtDate(holdings.as_of)} (paper trading run) — ${holdings.holdings.length} position(s)`
+    ? `Last Updated: ${fmtDate(holdings.as_of)} (paper trading run)`
     : "No data yet.";
 
   const rows = (holdings && holdings.holdings) || [];
-  renderDataTable("holdings-table",
-    [
-      { key: "ticker", label: "Ticker", textCell: true, format: (h) => `<strong>${h.ticker.replace(".NS", "")}</strong>` },
-      { key: "company", label: "Company", textCell: true },
-      { key: "sector", label: "Sector", textCell: true },
-      { key: "shares", label: "Shares", align: "right" },
-      { key: "entry_price", label: "Entry Price", align: "right", format: (h) => fmtCurrency(h.entry_price, 2) },
-      { key: "current_price", label: "Current Price", align: "right", format: (h) => fmtCurrency(h.current_price, 2) },
-      { key: "_value", label: "Value", align: "right", sortVal: (h) => h.current_price * h.shares, format: (h) => fmtCurrency(h.current_price * h.shares) },
-      { key: "current_return_pct", label: "Return %", align: "right", format: (h) => `<span class="${signClass(h.current_return_pct)}">${fmtPct(h.current_return_pct)}</span>` },
-      { key: "weight_pct", label: "Weight", align: "right", format: (h) => h.weight_pct !== null ? h.weight_pct.toFixed(1) + "%" : "—" },
-      { key: "holding_days", label: "Days Held", align: "right", format: (h) => h.holding_days ?? "—" },
-      { key: "momentum_rank", label: "Rank", align: "right", format: (h) => h.momentum_rank ?? "—" },
-    ],
-    rows,
-    { searchKeys: ["ticker", "company", "sector"], pageSize: 20, defaultSort: "weight_pct", emptyMsg: "No open positions." }
-  );
+  if (!rows.length) {
+    document.getElementById("sector-alloc").innerHTML = emptyState("No open positions.");
+    document.getElementById("holding-alloc").innerHTML = emptyState("No open positions.");
+  } else {
+    const bySector = new Map();
+    rows.forEach(h => {
+      const val = h.current_price * h.shares;
+      bySector.set(h.sector, (bySector.get(h.sector) || 0) + val);
+    });
+    const totalHoldingsVal = [...bySector.values()].reduce((a, b) => a + b, 0);
+    const sectorItems = [...bySector.entries()]
+      .map(([label, value]) => ({ label, value, pct: totalHoldingsVal ? (value / totalHoldingsVal * 100) : 0 }))
+      .sort((a, b) => b.pct - a.pct);
+    renderAllocationBars("sector-alloc", sectorItems);
+
+    const holdingItems = rows.map(h => ({
+      label: h.ticker.replace(".NS", ""), value: h.current_price * h.shares, pct: h.weight_pct || 0,
+    })).sort((a, b) => b.pct - a.pct);
+    renderAllocationBars("holding-alloc", holdingItems);
+  }
+
+  if (portfolio && portfolio.portfolio_value) {
+    const cashPct = portfolio.cash / portfolio.portfolio_value * 100;
+    const investedPct = (portfolio.invested_capital || 0) / portfolio.portfolio_value * 100;
+    renderAllocationBars("cash-alloc", [
+      { label: "Invested", value: portfolio.invested_capital, pct: investedPct },
+      { label: "Cash", value: portfolio.cash, pct: cashPct },
+    ]);
+  } else {
+    document.getElementById("cash-alloc").innerHTML = emptyState("No portfolio data yet.");
+  }
 })();
 </script>
 </body>

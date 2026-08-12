@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Risk</title>
+<link rel="stylesheet" href="assets/style.css?v=2">
+</head>
+<body>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
+    </div>
+    <main class="content">
+      <h1>Risk</h1>
+      <p class="subtitle" id="generated-at">Loading…</p>
+
+      <div class="kpi-grid" id="risk-kpi-grid"></div>
+
+      <h2>Drawdown</h2>
+      <div class="panel fade-in"><canvas id="drawdown-chart" style="width:100%;height:220px;"></canvas></div>
+
+      <h2>Rolling 20-Day Alpha (annualized, vs Nifty 50)</h2>
+      <div class="panel fade-in"><canvas id="rolling-alpha-chart" style="width:100%;height:220px;"></canvas></div>
+
+      <h2>Rolling 20-Day Beta (vs Nifty 50)</h2>
+      <div class="panel fade-in"><canvas id="rolling-beta-chart" style="width:100%;height:220px;"></canvas></div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js?v=2"></script>
+<script>
+(async function () {
+  renderShell("risk.html");
+  const [stats, perf, bench] = await Promise.all([fetchJSON("statistics.json"), fetchJSON("performance.json"), fetchJSON("benchmark.json")]);
+
+  document.getElementById("generated-at").textContent = stats
+    ? `Last Updated: ${fmtDate(stats.as_of)} (paper trading run)`
+    : "No data yet.";
+
+  const cards = [
+    { label: "Volatility (annualized)", value: stats && stats.annualized_volatility_pct !== null ? fmtPct(stats.annualized_volatility_pct) : "Insufficient history" },
+    { label: "Sharpe Ratio", value: stats && stats.sharpe_ratio !== null ? fmtNum(stats.sharpe_ratio) : "Insufficient history" },
+    { label: "Sortino Ratio", value: stats && stats.sortino_ratio !== null ? fmtNum(stats.sortino_ratio) : "Insufficient history" },
+    { label: "Calmar Ratio", value: stats && stats.calmar_ratio !== null ? fmtNum(stats.calmar_ratio) : "Insufficient history" },
+    { label: "Maximum Drawdown", value: stats && stats.max_drawdown_pct !== null ? fmtPct(stats.max_drawdown_pct) : "Insufficient history", cls: "neg" },
+  ];
+  document.getElementById("risk-kpi-grid").innerHTML = cards.map(c => `
+    <div class="kpi-card fade-in"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
+
+  if (perf && perf.available) {
+    simpleLineChart("drawdown-chart", [{ label: "Drawdown %", color: CHART_COLORS.red, points: seriesFromDict(perf.drawdown_curve) }], { yDecimals: 1, legend: false });
+  } else {
+    simpleLineChart("drawdown-chart", [], { emptyMsg: "No equity history yet." });
+  }
+
+  const nifty = bench && bench.benchmarks && bench.benchmarks.NIFTY50;
+  const rab = nifty && nifty.rolling_alpha_beta;
+  if (rab && rab.available) {
+    simpleLineChart("rolling-alpha-chart", [{
+      label: "Alpha", color: CHART_COLORS.portfolio,
+      points: rab.dates.map((d, i) => [new Date(d).getTime(), rab.alpha_annualized_pct[i]]),
+    }], { yDecimals: 1, legend: false });
+    simpleLineChart("rolling-beta-chart", [{
+      label: "Beta", color: CHART_COLORS.benchmark,
+      points: rab.dates.map((d, i) => [new Date(d).getTime(), rab.beta[i]]),
+    }], { yDecimals: 2, legend: false });
+  } else {
+    const note = (rab && rab.note) || "Not enough aligned trading history yet for a 20-day rolling window.";
+    simpleLineChart("rolling-alpha-chart", [], { emptyMsg: note });
+    simpleLineChart("rolling-beta-chart", [], { emptyMsg: note });
+  }
+})();
+</script>
+</body>
+</html>

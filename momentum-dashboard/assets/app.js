@@ -4,51 +4,101 @@
    india_momentum_v2's automation/json_export.py after every paper
    trading session) and renders them. */
 
-const PAGES = [
-  { href: "index.html", label: "Overview" },
-  { href: "holdings.html", label: "Holdings" },
-  { href: "trades.html", label: "Trade History" },
-  { href: "performance.html", label: "Performance" },
-  { href: "benchmark.html", label: "Benchmark" },
-  { href: "yield-curve.html", label: "Yield Curve" },
-  { href: "statistics.html", label: "Statistics" },
-  { href: "report.html", label: "Latest Report" },
-  { href: "health.html", label: "System Health" },
+/* Minimal, consistent line-icon set (24x24 viewBox, stroke-based) -
+   hand-rolled so the sidebar never depends on an external icon font/CDN.
+   Deliberately plain geometric shapes, no cartoon icons. */
+const ICONS = {
+  overview: '<path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/>',
+  portfolio: '<path d="M3 20V10m6 10V4m6 16V13m6 7V7"/>',
+  holdings: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
+  trades: '<path d="M4 7h13l-3-3m3 3-3 3M20 17H7l3 3m-3-3 3-3"/>',
+  performance: '<path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/>',
+  benchmark: '<path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 5-6"/>',
+  risk: '<path d="M12 3 3 20h18L12 3Z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/>',
+  statistics: '<path d="M4 20V4"/><rect x="6" y="12" width="3" height="8"/><rect x="11" y="7" width="3" height="13"/><rect x="16" y="15" width="3" height="5"/>',
+  health: '<path d="M3 12h4l2 8 4-16 2 8h6"/>',
+  reports: '<path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h6M9 17h6"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
+  yield: '<path d="M4 18c3-8 6 4 9-4s5 2 7-6"/>',
+};
+
+const SIDEBAR_PAGES = [
+  { href: "index.html", label: "Overview", icon: "overview" },
+  { href: "portfolio.html", label: "Portfolio", icon: "portfolio" },
+  { href: "holdings.html", label: "Holdings", icon: "holdings" },
+  { href: "trades.html", label: "Trades", icon: "trades" },
+  { href: "performance.html", label: "Performance", icon: "performance" },
+  { href: "benchmark.html", label: "Benchmark", icon: "benchmark" },
+  { href: "yield-curve.html", label: "Yield Curve", icon: "yield" },
+  { href: "risk.html", label: "Risk", icon: "risk" },
+  { href: "statistics.html", label: "Statistics", icon: "statistics" },
+  { href: "health.html", label: "Health", icon: "health" },
+  { href: "report.html", label: "Reports", icon: "reports" },
+  { href: "settings.html", label: "Settings", icon: "settings" },
 ];
 
-function renderNav(activeHref) {
-  const nav = document.getElementById("nav-tabs");
+// Kept for old pages mid-migration; new pages call renderShell() directly.
+function renderNav(activeHref) { renderShell(activeHref); }
+
+function renderShell(activeHref) {
+  const root = document.getElementById("app-root");
+  if (!root) return;
+  const nav = root.querySelector(".sidebar-nav");
   if (nav) {
-    nav.innerHTML = PAGES.map(
-      (p) => `<a href="${p.href}" class="${p.href === activeHref ? "active" : ""}">${p.label}</a>`
-    ).join("");
+    nav.innerHTML = SIDEBAR_PAGES.map((p) => `
+      <a href="${p.href}" class="${p.href === activeHref ? "active" : ""}">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[p.icon] || ""}</svg>
+        <span>${p.label}</span>
+      </a>`).join("");
   }
-  updateModeBanner();
+  const toggle = root.querySelector(".sidebar-toggle");
+  const sidebar = root.querySelector(".sidebar");
+  if (toggle && sidebar) {
+    toggle.addEventListener("click", () => sidebar.classList.toggle("open"));
+  }
+  updateTopbar();
 }
 
-async function updateModeBanner() {
-  /* Reads the real mode (PAPER or LIVE) from data/health.json - every
-     JSON file carries the same "mode" field (see json_export.py's
-     generate_all()) so any of them would work; this one is small and
-     always generated. Note: this repo's data/ renames system_health.json
-     -> health.json at publish time (see json_export.py's external-target
-     branch) - health.html already fetches "health.json" for the same
-     reason. Replaces the old hardcoded "MODE: PAPER TRADING - no real
-     orders, ever, on this site" text, which stayed on screen unchanged
-     regardless of the actual SWING_LIVE_ENABLED state. */
-  const banner = document.querySelector(".mode-banner");
-  if (!banner) return;
-  const health = await fetchJSON("health.json");
-  const mode = (health && health.mode) ? String(health.mode).toUpperCase() : null;
-  if (mode === "LIVE") {
-    banner.textContent = "MODE: LIVE TRADING — real orders, real capital, via Zerodha Kite Connect";
-    banner.classList.add("live");
-  } else if (mode === "PAPER") {
-    banner.textContent = "MODE: PAPER TRADING — no real orders, ever, on this site";
-    banner.classList.remove("live");
-  } else {
-    banner.textContent = "MODE: UNKNOWN — could not confirm paper/live status from data";
-    banner.classList.add("live");
+async function updateTopbar() {
+  /* Populates the persistent top stats bar (Portfolio Value, Today's
+     Return, Benchmark Return, Cash, Exposure, Last Updated, Mode) and the
+     mode pill from portfolio.json + health.json - every page shows the
+     same live snapshot regardless of what its own main content is about. */
+  const [portfolio, health] = await Promise.all([fetchJSON("portfolio.json"), fetchJSON("health.json")]);
+  const set = (id, text, cls) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    if (cls !== undefined) el.className = "stat-value " + cls;
+  };
+
+  if (portfolio) {
+    set("tb-value", fmtCurrency(portfolio.portfolio_value));
+    const bc = portfolio.benchmark_comparison;
+    if (bc && bc.available) {
+      set("tb-today", portfolio.today_return ? fmtPct(portfolio.today_return.change_pct) : "—",
+          portfolio.today_return ? signClass(portfolio.today_return.change_pct) : "");
+      set("tb-bench", bc.benchmark_daily_pct !== null ? fmtPct(bc.benchmark_daily_pct) : "—",
+          signClass(bc.benchmark_daily_pct));
+    } else {
+      set("tb-today", portfolio.today_return ? fmtPct(portfolio.today_return.change_pct) : "—",
+          portfolio.today_return ? signClass(portfolio.today_return.change_pct) : "");
+      set("tb-bench", "—");
+    }
+    set("tb-cash", fmtCurrency(portfolio.cash));
+    const exposure = (portfolio.portfolio_value && portfolio.invested_capital !== null)
+      ? (portfolio.invested_capital / portfolio.portfolio_value * 100) : null;
+    set("tb-exposure", exposure !== null ? exposure.toFixed(1) + "%" : "—");
+    const updatedEl = document.getElementById("tb-updated");
+    if (updatedEl) updatedEl.textContent = fmtDate(portfolio.as_of);
+  }
+
+  const modeEl = document.getElementById("tb-mode");
+  if (modeEl) {
+    const mode = (health && health.mode) ? String(health.mode).toUpperCase() : null;
+    if (mode === "LIVE") { modeEl.textContent = "LIVE"; modeEl.classList.add("live"); }
+    else if (mode === "PAPER") { modeEl.textContent = "PAPER"; modeEl.classList.remove("live"); }
+    else { modeEl.textContent = "UNKNOWN"; modeEl.classList.add("live"); }
   }
 }
 
@@ -102,7 +152,11 @@ function emptyState(msg) {
   return `<div class="empty-state">${msg}</div>`;
 }
 
-const CHART_COLORS = { portfolio: "#4f8cff", benchmark: "#f59e0b", cash: "#22c55e", invested: "#a78bfa", red: "#ef4444" };
+const CHART_COLORS = { portfolio: "#5b8def", benchmark: "#d9a441", cash: "#2fbf71", invested: "#8b8fa8", red: "#f0555c" };
+const SECTOR_PALETTE = ["#5b8def", "#2fbf71", "#d9a441", "#8b8fa8", "#f0555c", "#4dd0c9", "#c78de0", "#e08a5e", "#6ea8dc", "#a3c96b"];
+// Chart chrome colors, centralized here to match the design tokens in
+// style.css (canvas can't read CSS custom properties directly).
+const CHART_INK = { grid: "#1c1f26", axisText: "#63676f", tooltipBg: "#101216", tooltipBorder: "#2a2e37", tooltipText: "#e9eaed", pointStroke: "#08090b" };
 
 // Catmull-Rom -> cubic Bezier, so lines read as a smooth curve instead of
 // straight segments — the single biggest visual difference between "a
@@ -155,7 +209,7 @@ function simpleLineChart(canvasId, series, opts = {}) {
   const allPoints = series.flatMap((s) => s.points);
   if (allPoints.length < 2) {
     ctx.scale(dpr, dpr);
-    ctx.fillStyle = "#8fa0c3";
+    ctx.fillStyle = "#63676f";
     ctx.font = "13px sans-serif";
     ctx.fillText(opts.emptyMsg || "Not enough data yet.", 12, h / 2);
     return;
@@ -177,8 +231,8 @@ function simpleLineChart(canvasId, series, opts = {}) {
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, w, h);
 
-    ctx.strokeStyle = "#263553";
-    ctx.fillStyle = "#8fa0c3";
+    ctx.strokeStyle = CHART_INK.grid;
+    ctx.fillStyle = CHART_INK.axisText;
     ctx.font = "10px sans-serif";
     ctx.lineWidth = 1;
     const nGrid = 4;
@@ -223,11 +277,11 @@ function simpleLineChart(canvasId, series, opts = {}) {
         ctx.arc(px, py, 4, 0, Math.PI * 2);
         ctx.fillStyle = s.color;
         ctx.fill();
-        ctx.strokeStyle = "#0b1220";
+        ctx.strokeStyle = "#08090b";
         ctx.lineWidth = 1.5;
         ctx.stroke();
         if (si === 0) {
-          ctx.strokeStyle = "rgba(143,160,195,0.35)";
+          ctx.strokeStyle = "rgba(99,103,111,0.4)";
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(px, padT);
@@ -239,14 +293,14 @@ function simpleLineChart(canvasId, series, opts = {}) {
           ctx.font = "11px sans-serif";
           const tw = ctx.measureText(label).width + 14;
           const tx = Math.min(Math.max(px - tw / 2, padL), w - padR - tw);
-          ctx.fillStyle = "#16213a";
-          ctx.strokeStyle = "#263553";
+          ctx.fillStyle = "#101216";
+          ctx.strokeStyle = "#2a2e37";
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.roundRect ? ctx.roundRect(tx, 2, tw, 18, 5) : ctx.rect(tx, 2, tw, 18);
           ctx.fill();
           ctx.stroke();
-          ctx.fillStyle = "#e6ebf5";
+          ctx.fillStyle = "#e9eaed";
           ctx.fillText(label, tx + 7, 15);
         }
       }
@@ -257,7 +311,7 @@ function simpleLineChart(canvasId, series, opts = {}) {
       series.forEach((s) => {
         ctx.fillStyle = s.color;
         ctx.fillRect(lx, 2, 10, 10);
-        ctx.fillStyle = "#e6ebf5";
+        ctx.fillStyle = "#e9eaed";
         ctx.font = "11px sans-serif";
         ctx.fillText(s.label, lx + 14, 11);
         lx += ctx.measureText(s.label).width + 34;
@@ -295,7 +349,7 @@ function yieldCurveChart(canvasId, points, opts = {}) {
   const valid = points.filter((p) => p.yield_pct !== null && p.yield_pct !== undefined);
   if (valid.length < 2) {
     ctx.scale(dpr, dpr);
-    ctx.fillStyle = "#8fa0c3";
+    ctx.fillStyle = "#63676f";
     ctx.font = "13px sans-serif";
     ctx.fillText(opts.emptyMsg || "Yield curve data unavailable right now.", 12, h / 2);
     return;
@@ -315,8 +369,8 @@ function yieldCurveChart(canvasId, points, opts = {}) {
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, w, h);
 
-    ctx.strokeStyle = "#263553";
-    ctx.fillStyle = "#8fa0c3";
+    ctx.strokeStyle = CHART_INK.grid;
+    ctx.fillStyle = CHART_INK.axisText;
     ctx.font = "10px sans-serif";
     ctx.lineWidth = 1;
     const nGrid = 4;
@@ -330,7 +384,7 @@ function yieldCurveChart(canvasId, points, opts = {}) {
       ctx.fillText(yVal.toFixed(2) + "%", 2, yPix + 3);
     }
 
-    ctx.fillStyle = "#8fa0c3";
+    ctx.fillStyle = "#63676f";
     ctx.font = "11px sans-serif";
     points.forEach((p, i) => {
       const label = p.maturity;
@@ -339,7 +393,7 @@ function yieldCurveChart(canvasId, points, opts = {}) {
     });
 
     const pix = points.map((p, i) => [sx(i), p.yield_pct !== null ? sy(p.yield_pct) : null]);
-    const color = opts.color || "#4f8cff";
+    const color = opts.color || CHART_COLORS.portfolio;
 
     const validPix = pix.filter((p) => p[1] !== null);
     if (validPix.length >= 2) {
@@ -369,7 +423,7 @@ function yieldCurveChart(canvasId, points, opts = {}) {
       ctx.arc(p[0], p[1], isHover ? 5.5 : 3.5, 0, Math.PI * 2);
       ctx.fillStyle = isHover ? "#fff" : color;
       ctx.fill();
-      ctx.strokeStyle = "#0b1220";
+      ctx.strokeStyle = "#08090b";
       ctx.lineWidth = 1.5;
       ctx.stroke();
     });
@@ -377,7 +431,7 @@ function yieldCurveChart(canvasId, points, opts = {}) {
     if (hoverIdx !== undefined && pix[hoverIdx] && pix[hoverIdx][1] !== null) {
       const [px, py] = pix[hoverIdx];
       const p = points[hoverIdx];
-      ctx.strokeStyle = "rgba(143,160,195,0.35)";
+      ctx.strokeStyle = "rgba(99,103,111,0.4)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(px, padT);
@@ -391,13 +445,13 @@ function yieldCurveChart(canvasId, points, opts = {}) {
       const tw = ctx.measureText(label).width + 16;
       const tx = Math.min(Math.max(px - tw / 2, padL), w - padR - tw);
       const ty = Math.max(py - 34, padT);
-      ctx.fillStyle = "#16213a";
-      ctx.strokeStyle = "#263553";
+      ctx.fillStyle = "#101216";
+      ctx.strokeStyle = "#2a2e37";
       ctx.beginPath();
       ctx.roundRect ? ctx.roundRect(tx, ty, tw, 22, 6) : ctx.rect(tx, ty, tw, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#e6ebf5";
+      ctx.fillStyle = "#e9eaed";
       ctx.fillText(label, tx + 8, ty + 15);
     }
   }
@@ -452,4 +506,153 @@ function seriesFromDict(dict) {
   return Object.entries(dict)
     .map(([k, v]) => [new Date(k).getTime(), v])
     .sort((a, b) => a[0] - b[0]);
+}
+
+// ── Reusable sortable / searchable / paginated table ──────────────────
+// columns: [{key, label, format?: (row)=>html, sortVal?: (row)=>number|string, align?: "right"}]
+// opts: { searchKeys: [...], pageSize: 15 }
+function renderDataTable(containerId, columns, rows, opts = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const pageSize = opts.pageSize || 15;
+  const searchKeys = opts.searchKeys || [];
+  let state = { sortKey: opts.defaultSort || null, sortDir: opts.defaultSortDir || "desc", query: "", page: 1 };
+
+  container.innerHTML = `
+    <div class="table-toolbar">
+      ${searchKeys.length ? `<input type="text" class="table-search" placeholder="Search…" id="${containerId}-search">` : ""}
+    </div>
+    <div class="table-scroll"><table><thead><tr>
+      ${columns.map(c => `<th data-key="${c.key}" style="${c.align === "right" ? "text-align:right" : ""}">${c.label}<span class="sort-arrow"></span></th>`).join("")}
+    </tr></thead><tbody id="${containerId}-body"></tbody></table></div>
+    <div class="table-pagination" id="${containerId}-pagination"></div>`;
+
+  function filteredSorted() {
+    let out = rows;
+    if (state.query) {
+      const q = state.query.toLowerCase();
+      out = out.filter(r => searchKeys.some(k => String(r[k] ?? "").toLowerCase().includes(q)));
+    }
+    if (state.sortKey) {
+      const col = columns.find(c => c.key === state.sortKey);
+      const getVal = col && col.sortVal ? col.sortVal : (r) => r[state.sortKey];
+      out = [...out].sort((a, b) => {
+        const av = getVal(a), bv = getVal(b);
+        if (av === null || av === undefined) return 1;
+        if (bv === null || bv === undefined) return -1;
+        const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
+        return state.sortDir === "asc" ? cmp : -cmp;
+      });
+    }
+    return out;
+  }
+
+  function render() {
+    const data = filteredSorted();
+    const totalPages = Math.max(1, Math.ceil(data.length / pageSize));
+    state.page = Math.min(state.page, totalPages);
+    const pageRows = data.slice((state.page - 1) * pageSize, state.page * pageSize);
+
+    const body = document.getElementById(`${containerId}-body`);
+    body.innerHTML = pageRows.length
+      ? pageRows.map(r => `<tr>${columns.map(c =>
+          `<td class="${c.textCell ? "text-cell" : ""}" style="${c.align === "right" ? "text-align:right" : ""}">${c.format ? c.format(r) : (r[c.key] ?? "—")}</td>`
+        ).join("")}</tr>`).join("")
+      : `<tr><td colspan="${columns.length}">${emptyState(opts.emptyMsg || "No matching rows.")}</td></tr>`;
+
+    container.querySelectorAll("th[data-key]").forEach(th => {
+      const key = th.dataset.key;
+      th.classList.toggle("sorted", key === state.sortKey);
+      const arrow = th.querySelector(".sort-arrow");
+      arrow.textContent = key === state.sortKey ? (state.sortDir === "asc" ? "▲" : "▼") : "";
+    });
+
+    const pag = document.getElementById(`${containerId}-pagination`);
+    if (data.length <= pageSize) {
+      pag.innerHTML = `<span>${data.length} row${data.length === 1 ? "" : "s"}</span>`;
+    } else {
+      const start = (state.page - 1) * pageSize + 1, end = Math.min(state.page * pageSize, data.length);
+      pag.innerHTML = `<span>${start}-${end} of ${data.length}</span>
+        <div class="page-btns">
+          <button data-action="prev" ${state.page === 1 ? "disabled" : ""}>Prev</button>
+          <span style="padding:4px 8px;">Page ${state.page} / ${totalPages}</span>
+          <button data-action="next" ${state.page === totalPages ? "disabled" : ""}>Next</button>
+        </div>`;
+      pag.querySelector('[data-action="prev"]')?.addEventListener("click", () => { state.page--; render(); });
+      pag.querySelector('[data-action="next"]')?.addEventListener("click", () => { state.page++; render(); });
+    }
+  }
+
+  container.querySelectorAll("th[data-key]").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      if (state.sortKey === key) state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+      else { state.sortKey = key; state.sortDir = "desc"; }
+      state.page = 1;
+      render();
+    });
+  });
+  const searchEl = document.getElementById(`${containerId}-search`);
+  if (searchEl) {
+    searchEl.addEventListener("input", () => { state.query = searchEl.value; state.page = 1; render(); });
+  }
+  render();
+}
+
+// ── Sector / holding / cash allocation bars ────────────────────────────
+function renderAllocationBars(containerId, items) {
+  // items: [{label, value, pct}], sorted desc by caller
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  if (!items.length) { container.innerHTML = emptyState("No allocation data yet."); return; }
+  container.innerHTML = `<div class="alloc-list">${items.map((it, i) => `
+    <div class="alloc-row">
+      <div class="alloc-label">${it.label}</div>
+      <div class="alloc-bar-track"><div class="alloc-bar-fill" style="width:${Math.max(it.pct, 0.5)}%; background:${SECTOR_PALETTE[i % SECTOR_PALETTE.length]};"></div></div>
+      <div class="alloc-pct">${it.pct.toFixed(1)}%</div>
+    </div>`).join("")}</div>`;
+}
+
+// ── Monthly returns heatmap, from an equity curve dict {iso: value} ────
+function renderMonthlyHeatmap(containerId, equityCurve) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const entries = Object.entries(equityCurve || {}).map(([k, v]) => [new Date(k), v]).sort((a, b) => a[0] - b[0]);
+  if (entries.length < 2) { container.innerHTML = emptyState("Not enough history yet for a monthly breakdown."); return; }
+
+  // Last equity value per (year, month), then month-over-month % change.
+  const byMonth = new Map();
+  entries.forEach(([d, v]) => { byMonth.set(`${d.getFullYear()}-${d.getMonth()}`, v); });
+  const months = [...byMonth.keys()].sort();
+  const monthReturns = {};
+  let prevVal = null;
+  months.forEach((key) => {
+    const val = byMonth.get(key);
+    monthReturns[key] = prevVal !== null ? ((val - prevVal) / prevVal) * 100 : null;
+    prevVal = val;
+  });
+
+  const years = [...new Set(months.map(m => m.split("-")[0]))].sort();
+  const MONTH_LABELS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const maxAbs = Math.max(1, ...Object.values(monthReturns).filter(v => v !== null).map(Math.abs));
+
+  function cellStyle(v) {
+    if (v === null || v === undefined) return "background:transparent; border-color:transparent; color:var(--text-muted);";
+    const intensity = Math.min(Math.abs(v) / maxAbs, 1);
+    const color = v >= 0 ? `rgba(47,191,113,${0.12 + intensity * 0.45})` : `rgba(240,85,92,${0.12 + intensity * 0.45})`;
+    return `background:${color}; color:${intensity > 0.55 ? "#e9eaed" : "var(--text-secondary)"};`;
+  }
+
+  let html = `<table class="heatmap-table"><thead><tr><th></th>${MONTH_LABELS.map(m => `<th>${m}</th>`).join("")}</tr></thead><tbody>`;
+  years.forEach(y => {
+    html += `<tr><td class="heatmap-year-label">${y}</td>`;
+    for (let m = 0; m < 12; m++) {
+      const key = `${y}-${m}`;
+      const v = monthReturns[key];
+      html += `<td class="heatmap-cell" style="${cellStyle(v)}">${v !== null && v !== undefined ? (v > 0 ? "+" : "") + v.toFixed(1) + "%" : (byMonth.has(key) ? "—" : "")}</td>`;
+    }
+    html += `</tr>`;
+  });
+  html += `</tbody></table>`;
+  container.innerHTML = html;
 }

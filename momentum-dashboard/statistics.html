@@ -4,23 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Momentum Dashboard — Statistics</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
-<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
-<div class="topbar">
-  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
-  <nav class="tabs" id="nav-tabs"></nav>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
+    </div>
+    <main class="content">
+      <h1>Performance Statistics</h1>
+      <p class="subtitle" id="generated-at">Loading…</p>
+      <div id="stats-container"></div>
+    </main>
+  </div>
 </div>
-<main>
-  <h1>Performance Statistics</h1>
-  <p class="subtitle" id="generated-at">Loading…</p>
-  <div id="stats-container"></div>
-</main>
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=2"></script>
 <script>
 (async function () {
-  renderNav("statistics.html");
+  renderShell("statistics.html");
   const stats = await fetchJSON("statistics.json");
 
   document.getElementById("generated-at").textContent = stats
@@ -66,7 +81,7 @@
     return v;
   }
   function section(title, metrics) {
-    return `<div class="panel"><h3>${title}</h3><div class="kpi-grid">
+    return `<div class="panel fade-in"><h3>${title}</h3><div class="kpi-grid">
       ${metrics.map(([label, v, kind]) => `
         <div class="kpi-card"><div class="label">${label}</div>
           <div class="value ${kind !== "raw" && kind !== "pctabs" ? signClass(v) : ""}">${fmtVal(v, kind)}</div></div>`).join("")}

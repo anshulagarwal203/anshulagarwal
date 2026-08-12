@@ -4,31 +4,49 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Momentum Dashboard — Trade History</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
-<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
-<div class="topbar">
-  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
-  <nav class="tabs" id="nav-tabs"></nav>
-</div>
-<main>
-  <h1>Trade History</h1>
-  <p class="subtitle" id="generated-at">Loading…</p>
-  <div class="read-only-banner">Reasons shown are the actual mechanical signals the strategy used (momentum entry threshold; stop-loss / target / RSI / time-based exit) — not AI-generated commentary.</div>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
+    </div>
+    <main class="content">
+      <h1>Trade History</h1>
+      <p class="subtitle" id="generated-at">Loading…</p>
+      <div class="read-only-banner fade-in">Reasons shown are the actual mechanical signals the strategy used (momentum entry threshold; stop-loss / target / RSI / time-based exit) — not AI-generated commentary.</div>
 
-  <div class="trade-filter" id="trade-filter">
-    <button data-filter="all" class="active">All Trades</button>
-    <button data-filter="BUY">Buy Orders</button>
-    <button data-filter="SELL">Sell Orders</button>
+      <div class="table-toolbar fade-in">
+        <input type="text" class="table-search" id="trade-search" placeholder="Search ticker or company…">
+        <div class="table-filter-group" id="trade-filter">
+          <button data-filter="all" class="chip-btn active">All Trades</button>
+          <button data-filter="BUY" class="chip-btn">Buy Orders</button>
+          <button data-filter="SELL" class="chip-btn">Sell Orders</button>
+        </div>
+      </div>
+
+      <div id="trade-cards"></div>
+    </main>
   </div>
-
-  <div id="trade-cards"></div>
-</main>
-<script src="assets/app.js"></script>
+</div>
+<script src="assets/app.js?v=2"></script>
 <script>
 (async function () {
-  renderNav("trades.html");
+  renderShell("trades.html");
   const [trades, holdings] = await Promise.all([fetchJSON("trades.json"), fetchJSON("holdings.json")]);
 
   const asOf = (trades && trades.as_of) || (holdings && holdings.as_of);
@@ -36,29 +54,16 @@
     ? `Last Updated: ${fmtDate(asOf)} (paper trading run)`
     : "No data yet.";
 
-  const buyCards = ((holdings && holdings.holdings) || []).map(h => ({
-    kind: "BUY", date: h.entry_date, symbol: h.ticker, company: h.company,
-    h,
-  }));
-  const sellCards = ((trades && trades.trades) || []).map(t => ({
-    kind: "SELL", date: t.exit_date, symbol: t.symbol, company: null,
-    t,
-  }));
-
+  const buyCards = ((holdings && holdings.holdings) || []).map(h => ({ kind: "BUY", date: h.entry_date, symbol: h.ticker, h }));
+  const sellCards = ((trades && trades.trades) || []).map(t => ({ kind: "SELL", date: t.exit_date, symbol: t.symbol, t }));
   const all = [...buyCards, ...sellCards].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
   const container = document.getElementById("trade-cards");
-  if (!all.length) {
-    container.innerHTML = emptyState("No trades yet — this fills in as the strategy enters and exits positions.");
-    document.getElementById("trade-filter").style.display = "none";
-    return;
-  }
+  let currentFilter = "all", currentQuery = "";
 
   function renderBuyCard(c) {
     const h = c.h;
-    const value = h.current_price * h.shares;
-    return `
-    <div class="trade-card" data-kind="BUY">
+    return `<div class="trade-card fade-in" data-kind="BUY">
       <div class="trade-card-header">
         <span class="trade-badge buy">BUY</span>
         <span class="trade-date">${c.date ? fmtDate(c.date).split(",")[0] : "—"}</span>
@@ -73,7 +78,7 @@
       <div class="trade-reason-text">${entryThesis(h)}</div>
       <div class="trade-stats-grid">
         <div class="trade-stat"><div class="label">Shares Held</div><div class="value">${h.shares}</div></div>
-        <div class="trade-stat"><div class="label">Current Value</div><div class="value">${fmtCurrency(value)}</div></div>
+        <div class="trade-stat"><div class="label">Current Value</div><div class="value">${fmtCurrency(h.current_price * h.shares)}</div></div>
         <div class="trade-stat"><div class="label">Unrealized Return</div><div class="value ${signClass(h.current_return_pct)}">${fmtPct(h.current_return_pct)}</div></div>
         <div class="trade-stat"><div class="label">Portfolio Weight</div><div class="value">${h.weight_pct !== null ? h.weight_pct.toFixed(1) + "%" : "—"}</div></div>
       </div>
@@ -83,8 +88,7 @@
   function renderSellCard(c) {
     const t = c.t;
     const reason = parseExitReason(t.exit_reason);
-    return `
-    <div class="trade-card" data-kind="SELL">
+    return `<div class="trade-card fade-in" data-kind="SELL">
       <div class="trade-card-header">
         <span class="trade-badge sell">SELL</span>
         <span class="trade-date">${fmtDate(t.exit_date).split(",")[0]}</span>
@@ -110,19 +114,27 @@
     </div>`;
   }
 
-  function render(filter) {
-    const filtered = filter === "all" ? all : all.filter(c => c.kind === filter);
-    container.innerHTML = filtered.length
-      ? filtered.map(c => c.kind === "BUY" ? renderBuyCard(c) : renderSellCard(c)).join("")
-      : emptyState(`No ${filter === "BUY" ? "buy" : "sell"} orders yet.`);
+  function matchesQuery(c, q) {
+    if (!q) return true;
+    const hay = (c.symbol + " " + (c.kind === "BUY" ? (c.h.company || "") : (c.t.sector || ""))).toLowerCase();
+    return hay.includes(q.toLowerCase());
   }
 
-  render("all");
+  function render() {
+    const filtered = all.filter(c => (currentFilter === "all" || c.kind === currentFilter) && matchesQuery(c, currentQuery));
+    container.innerHTML = filtered.length
+      ? filtered.map(c => c.kind === "BUY" ? renderBuyCard(c) : renderSellCard(c)).join("")
+      : emptyState(all.length ? "No trades match your filter." : "No trades yet — this fills in as the strategy enters and exits positions.");
+  }
+
+  render();
+  document.getElementById("trade-search").addEventListener("input", (e) => { currentQuery = e.target.value; render(); });
   document.querySelectorAll("#trade-filter button").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll("#trade-filter button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      render(btn.dataset.filter);
+      currentFilter = btn.dataset.filter;
+      render();
     });
   });
 })();

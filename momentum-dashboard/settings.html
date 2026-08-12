@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Dashboard — Settings</title>
+<link rel="stylesheet" href="assets/style.css?v=2">
+</head>
+<body>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
+    </div>
+    <main class="content">
+      <h1>Settings</h1>
+      <p class="subtitle">This is a read-only public dashboard — there are no user accounts and nothing here is configurable per-visitor. This page documents how the site itself is configured.</p>
+
+      <div class="panel fade-in">
+        <h3>Site</h3>
+        <div class="settings-row"><div><div class="settings-label">Trading mode</div><div class="settings-desc">Read directly from the latest data export — never hardcoded.</div></div><div class="settings-val" id="s-mode">—</div></div>
+        <div class="settings-row"><div><div class="settings-label">Strategy</div><div class="settings-desc">India Momentum Trader — daily-bar ROC/RSI momentum, ATR stop/target, NSE universe.</div></div><div class="settings-val">Momentum (daily)</div></div>
+        <div class="settings-row"><div><div class="settings-label">Primary benchmark</div><div class="settings-desc">Used for daily/since-inception comparison on the Overview page.</div></div><div class="settings-val">Nifty 50</div></div>
+        <div class="settings-row"><div><div class="settings-label">Data refresh</div><div class="settings-desc">Regenerated after every scan/execute run and every intraday check.</div></div><div class="settings-val">Automatic</div></div>
+      </div>
+
+      <div class="panel fade-in">
+        <h3>Data &amp; Methodology</h3>
+        <div class="settings-row"><div><div class="settings-label">Source code</div><div class="settings-desc">Strategy, backtests, and automation are not published in this repo.</div></div><div class="settings-val muted">Private</div></div>
+        <div class="settings-row"><div><div class="settings-label">Trade rationale</div><div class="settings-desc">Entry/exit reasons shown on Trades are the actual mechanical signals (ROC/RSI threshold, stop-loss, target, time-stop) — never AI-generated commentary.</div></div><div class="settings-val muted">Mechanical only</div></div>
+        <div class="settings-row"><div><div class="settings-label">Yield curve source</div><div class="settings-desc">US Treasury par yield curve rates, home.treasury.gov.</div></div><div class="settings-val muted">Public data</div></div>
+      </div>
+
+      <div class="panel fade-in">
+        <h3>Disclosures</h3>
+        <p style="font-size:0.84rem; line-height:1.6; color:var(--text-secondary);">
+          Information for educational purposes only — not investment advice. Figures on this site reflect a simulated paper portfolio unless the Mode indicator reads LIVE, in which case they reflect real capital deployed via Zerodha Kite Connect. Past performance does not indicate future results.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="assets/app.js?v=2"></script>
+<script>
+(async function () {
+  renderShell("settings.html");
+  const health = await fetchJSON("health.json");
+  document.getElementById("s-mode").textContent = (health && health.mode) ? String(health.mode).toUpperCase() : "—";
+})();
+</script>
+</body>
+</html>

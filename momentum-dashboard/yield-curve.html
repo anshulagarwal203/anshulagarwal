@@ -5,38 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Momentum Dashboard — US Treasury Yield Curve</title>
 <meta name="description" content="Live US Treasury par yield curve, for macro context alongside the India Momentum Trader paper portfolio.">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
-<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
-<div class="topbar">
-  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
-  <nav class="tabs" id="nav-tabs"></nav>
-</div>
-<main>
-  <h1>US Treasury Yield Curve</h1>
-  <p class="subtitle" id="generated-at">Loading…</p>
-  <div class="read-only-banner">Reference/macro context only — not part of the India strategy's signals. Source: US Treasury Department (home.treasury.gov), fetched daily alongside the rest of this site's data.</div>
-
-  <div class="kpi-grid" id="kpi-grid"></div>
-
-  <div class="panel">
-    <h3>Par Yield Curve — All Maturities</h3>
-    <canvas id="yield-canvas" style="width:100%; height:340px;"></canvas>
-  </div>
-
-  <div class="panel" id="table-panel" style="display:none;">
-    <h3>By Maturity</h3>
-    <div class="table-scroll">
-      <table><thead><tr><th>Maturity</th><th>Yield</th><th>Change (1d)</th></tr></thead>
-      <tbody id="yield-table-body"></tbody></table>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
     </div>
+    <main class="content">
+      <h1>US Treasury Yield Curve</h1>
+      <p class="subtitle" id="generated-at">Loading…</p>
+      <div class="read-only-banner fade-in">Reference/macro context only — not part of the India strategy's signals. Source: US Treasury Department (home.treasury.gov), fetched daily alongside the rest of this site's data.</div>
+
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <div class="panel fade-in">
+        <h3>Par Yield Curve — All Maturities</h3>
+        <canvas id="yield-canvas" style="width:100%; height:320px;"></canvas>
+      </div>
+
+      <div class="panel fade-in" id="table-panel" style="display:none;">
+        <h3>By Maturity</h3>
+        <div class="table-scroll">
+          <table><thead><tr><th>Maturity</th><th>Yield</th><th>Change (1d)</th></tr></thead>
+          <tbody id="yield-table-body"></tbody></table>
+        </div>
+      </div>
+    </main>
   </div>
-</main>
-<script src="assets/app.js"></script>
+</div>
+<script src="assets/app.js?v=2"></script>
 <script>
 (async function () {
-  renderNav("yield-curve.html");
+  renderShell("yield-curve.html");
   const yc = await fetchJSON("yield_curve.json");
 
   document.getElementById("generated-at").textContent = yc && yc.available
@@ -65,13 +80,13 @@
       cls: yc.curve_inverted_10y_2y ? "neg" : "pos" },
   ];
   kpiGrid.innerHTML = cards.map(c => `
-    <div class="kpi-card"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
+    <div class="kpi-card fade-in"><div class="label">${c.label}</div><div class="value ${c.cls || ""}">${c.value}</div></div>`).join("");
 
-  yieldCurveChart("yield-canvas", yc.points, { color: "#4f8cff" });
+  yieldCurveChart("yield-canvas", yc.points, { color: CHART_COLORS.portfolio });
 
   document.getElementById("table-panel").style.display = "";
   document.getElementById("yield-table-body").innerHTML = yc.points.map(p => `
-    <tr><td>${p.maturity}</td>
+    <tr><td class="text-cell">${p.maturity}</td>
       <td>${p.yield_pct !== null ? p.yield_pct.toFixed(2) + "%" : "—"}</td>
       <td class="${p.change_bps > 0 ? "pos" : p.change_bps < 0 ? "neg" : "muted"}">${p.change_bps !== null ? (p.change_bps > 0 ? "+" : "") + p.change_bps + " bps" : "—"}</td>
     </tr>`).join("");

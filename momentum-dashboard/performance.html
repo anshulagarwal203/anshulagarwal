@@ -4,31 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Momentum Dashboard — Performance</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 </head>
 <body>
-<div class="mode-banner">MODE: PAPER TRADING — no real orders, ever, on this site</div>
-<div class="topbar">
-  <div class="brand"><a href="../index.html" class="back">← anshulagarwal.com</a><span class="dot"></span> Momentum Dashboard</div>
-  <nav class="tabs" id="nav-tabs"></nav>
-</div>
-<main>
-  <h1>Performance</h1>
-  <p class="subtitle" id="generated-at">Loading… extends automatically after every completed trading day.</p>
+<div class="app-shell" id="app-root">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="dot"></span> Momentum Dashboard<a href="../index.html" class="back">← anshulagarwal.com</a></div>
+    <div class="sidebar-section-label">Navigate</div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">Read-only · No orders ever placed from this site</div>
+  </aside>
+  <div>
+    <div class="topbar-v2">
+      <button class="sidebar-toggle" aria-label="Toggle menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="stat-chip"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="tb-value">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Today's Return</span><span class="stat-value" id="tb-today">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Benchmark Return</span><span class="stat-value" id="tb-bench">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Cash</span><span class="stat-value" id="tb-cash">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Exposure</span><span class="stat-value" id="tb-exposure">—</span></div>
+      <div class="stat-chip"><span class="stat-label">Last Updated</span><span class="stat-value" id="tb-updated">—</span></div>
+      <div class="stat-chip mode-chip"><span class="stat-label">Mode</span><span class="mode-pill" id="tb-mode">—</span></div>
+    </div>
+    <main class="content">
+      <h1>Performance</h1>
+      <p class="subtitle" id="generated-at">Loading… extends automatically after every completed trading day.</p>
 
-  <div class="panel">
-    <h3>Equity Curve — Portfolio Value, Cash, Invested Capital</h3>
-    <canvas id="equity-chart" style="width:100%;height:300px;"></canvas>
+      <div class="panel fade-in">
+        <h3>Equity Curve — Portfolio Value, Cash, Invested Capital</h3>
+        <canvas id="equity-chart" style="width:100%;height:300px;"></canvas>
+      </div>
+      <div class="panel fade-in">
+        <h3>Drawdown</h3>
+        <canvas id="drawdown-chart" style="width:100%;height:200px;"></canvas>
+      </div>
+      <h2>Monthly Returns</h2>
+      <div class="panel fade-in">
+        <div class="table-scroll" id="monthly-heatmap"></div>
+      </div>
+    </main>
   </div>
-  <div class="panel">
-    <h3>Drawdown</h3>
-    <canvas id="drawdown-chart" style="width:100%;height:220px;"></canvas>
-  </div>
-</main>
-<script src="assets/app.js"></script>
+</div>
+<script src="assets/app.js?v=2"></script>
 <script>
 (async function () {
-  renderNav("performance.html");
+  renderShell("performance.html");
   const perf = await fetchJSON("performance.json");
 
   document.getElementById("generated-at").textContent = perf
@@ -38,6 +57,7 @@
   if (!perf || !perf.available) {
     simpleLineChart("equity-chart", [], { emptyMsg: "No equity history yet — updates after the next paper trading session." });
     simpleLineChart("drawdown-chart", [], { emptyMsg: "No equity history yet." });
+    document.getElementById("monthly-heatmap").innerHTML = emptyState("No equity history yet.");
     return;
   }
 
@@ -48,6 +68,8 @@
   ], { yDecimals: 0 });
 
   simpleLineChart("drawdown-chart", [{ label: "Drawdown %", color: CHART_COLORS.red, points: seriesFromDict(perf.drawdown_curve) }], { yDecimals: 1, legend: false });
+
+  renderMonthlyHeatmap("monthly-heatmap", perf.equity_curve);
 })();
 </script>
 </body>
