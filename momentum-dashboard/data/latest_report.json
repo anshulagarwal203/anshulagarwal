@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-11T21:12:29.728665",
-  "as_of": "2026-08-11T21:10:54.339922",
+  "generated_at": "2026-08-11T21:44:27.452255",
+  "as_of": "2026-08-11T21:30:21.396572",
   "mode": "LIVE",
-  "phase": "execute",
-  "portfolio_value": 9999.113425,
+  "phase": "scan",
+  "portfolio_value": 10024.663424999999,
   "cash": 8225.963425,
   "num_holdings": 2,
   "today_execution": {
@@ -150,22 +150,16 @@
       "reason": "RSI too high"
     }
   ],
-  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 149 of 497 screened names qualify today. EMIL.NS (EMIL.NS) leads the screen with +45.54% 10-day ROC and RSI 85.3, rejected (RSI too high). Today's opportunity set is broader than usual \u2014 149 qualifying candidates vs. a trailing 9-day average of 71.1. Momentum is concentrated: Materials accounts for 133 of 149 qualifying candidates (89%), across 9 sector(s) total.",
+  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 147 of 495 screened names qualify today. EMIL.NS (EMIL.NS) leads the screen with +45.54% 10-day ROC and RSI 85.3, rejected (RSI too high). Today's opportunity set is broader than usual \u2014 147 qualifying candidates vs. a trailing 10-day average of 78.9. Momentum is concentrated: Materials accounts for 131 of 147 qualifying candidates (89%), across 9 sector(s) total.",
   "market_summary": {
     "nifty_price": 24471.7,
     "nifty_ma50": 24026.26,
     "nifty_above_50dma": true,
-    "qualifying_candidates": 149,
+    "qualifying_candidates": 147,
     "rejected_candidates": 348,
-    "currently_held": 0,
-    "open_slots": 5
+    "currently_held": 2,
+    "open_slots": 3
   },
-  "errors": [
-    "PORTFOLIO RECONCILIATION FAILED: PTC.NS: tracked=7 kite=0; VOGL.NS: tracked=15 kite=0"
-  ],
-  "warnings": [
-    "ENTRY NOT FILLED SMLMAH.NS: PLACE_FAILED (Tick size for this script is 0.50. Kindly enter price in the multiple of tick size for this script) \u2014 no position opened",
-    "ENTRY NOT FILLED SHADOWFAX.NS: TIMEOUT (No terminal status after 60s (last=OPEN)) \u2014 no position opened",
-    "ENTRY NOT FILLED AVALON.NS: PLACE_FAILED (Tick size for this script is 0.10. Kindly enter price in the multiple of tick size for this script) \u2014 no position opened"
-  ]
+  "errors": [],
+  "warnings": []
 }

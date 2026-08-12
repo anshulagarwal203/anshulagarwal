@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-11T21:12:31.386090",
-  "overall_healthy": false,
+  "generated_at": "2026-08-11T21:44:32.663071",
+  "overall_healthy": true,
   "scheduler": {
     "last_scan": "2026-08-12",
     "last_execute": "2026-08-12",
-    "last_health_check": "2026-08-11T20:55:40.024217",
+    "last_health_check": "2026-08-11T21:23:11.441380",
     "next_scheduled_run": "2026-08-11 at 16:00 IST (scan) / 09:00 IST (execute)"
   },
   "broker_connection": {
-    "ok": null,
-    "detail": "not checked"
+    "ok": true,
+    "detail": "All Kite checks passed"
   },
   "authentication_status": {
     "name": "Authentication",
@@ -19,8 +19,8 @@
   "email_status": "configured",
   "dashboard_status": "generated today",
   "portfolio_sync": {
-    "ok": null,
-    "detail": "not checked"
+    "ok": true,
+    "detail": "No halt flags present"
   },
   "report_generation": {
     "dashboard": "generated today",
@@ -106,11 +106,39 @@
   "automation_halt_detail": "Not halted",
   "last_successful_run": "2026-08-12",
   "checks": {
-    "error": {
-      "ok": false,
-      "detail": "'utf-8' codec can't decode byte 0x97 in position 15: invalid start byte"
+    "last_successful_scan": {
+      "ok": true,
+      "detail": "Last run 0.2h ago (2026-08-11T21:30:21.396572, phase=scan, mode=LIVE)"
+    },
+    "positions_file": {
+      "ok": true,
+      "detail": "india_swing_positions_live.csv: 2 position(s); india_swing_positions_paper.csv: 5 position(s)"
+    },
+    "halt_flags": {
+      "ok": true,
+      "detail": "No halt flags present"
+    },
+    "disk_usage": {
+      "ok": true,
+      "detail": "191.5 GB free"
+    },
+    "log_size": {
+      "ok": true,
+      "detail": "0.38 MB total across daily logs"
+    },
+    "package_versions": {
+      "ok": true,
+      "detail": "Python 3.14.5, pandas 3.0.3, numpy 2.4.6, yfinance 1.3.0, kiteconnect 5.2.0"
+    },
+    "data_source": {
+      "ok": true,
+      "detail": "Yahoo Finance reachable"
+    },
+    "broker_connection": {
+      "ok": true,
+      "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-11T21:10:54.339922",
+  "as_of": "2026-08-11T21:30:21.396572",
   "mode": "LIVE"
 }

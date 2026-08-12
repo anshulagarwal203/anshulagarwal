@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:12:30.590446",
+  "generated_at": "2026-08-11T21:44:28.138730",
   "holdings": [
     {
       "ticker": "PTC.NS",
@@ -7,14 +7,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 169.65,
-      "current_price": 169.65,
+      "current_price": 171.95,
       "shares": 7,
-      "current_return_pct": 0.0,
-      "holding_days": null,
-      "momentum_rank": null,
-      "roc_pct": null,
-      "rsi": null,
-      "weight_pct": 66.97
+      "current_return_pct": 1.36,
+      "holding_days": 0,
+      "momentum_rank": 1,
+      "roc_pct": 16.86,
+      "rsi": 62.3,
+      "weight_pct": 66.92
     },
     {
       "ticker": "VOGL.NS",
@@ -22,16 +22,16 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 39.04,
-      "current_price": 39.04,
+      "current_price": 39.67,
       "shares": 15,
-      "current_return_pct": 0.0,
-      "holding_days": null,
-      "momentum_rank": null,
-      "roc_pct": null,
-      "rsi": null,
-      "weight_pct": 33.03
+      "current_return_pct": 1.61,
+      "holding_days": 0,
+      "momentum_rank": 2,
+      "roc_pct": 16.06,
+      "rsi": 59.9,
+      "weight_pct": 33.08
     }
   ],
-  "as_of": "2026-08-11T21:10:54.339922",
+  "as_of": "2026-08-11T21:30:21.396572",
   "mode": "LIVE"
 }
