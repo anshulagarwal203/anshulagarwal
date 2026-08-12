@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:56:25.261659",
+  "generated_at": "2026-08-11T21:57:02.154495",
   "mode": "LIVE",
   "portfolio_value": null,
   "cash": null,
@@ -20,11 +20,11 @@
   "benchmark_comparison": {
     "available": true,
     "benchmark_name": "Nifty 50",
-    "portfolio_daily_pct": 0.26,
-    "benchmark_daily_pct": -0.37,
-    "portfolio_since_inception_pct": 0.25,
+    "portfolio_daily_pct": -0.28,
+    "benchmark_daily_pct": -0.38,
+    "portfolio_since_inception_pct": -0.03,
     "benchmark_since_inception_pct": -0.46,
-    "excess_return_pct": 0.71
+    "excess_return_pct": 0.43
   },
   "as_of": "2026-08-11T21:56:09.792537"
 }

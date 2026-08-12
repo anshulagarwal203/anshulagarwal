@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:56:24.856054",
+  "generated_at": "2026-08-11T21:57:01.807481",
   "as_of": "2026-08-11T21:56:09.792537",
   "mode": "LIVE",
   "phase": "execute",
@@ -24,6 +24,14 @@
         "price": 39.04,
         "timestamp": "2026-08-12 09:42:25",
         "slippage_pct": -1.7861635220125807
+      },
+      {
+        "symbol": "SMLMAH.NS",
+        "action": "BUY",
+        "qty": 1,
+        "price": 5183.5,
+        "timestamp": "2026-08-12 10:24:27",
+        "slippage_pct": -0.6802069361946733
       }
     ],
     "ist_date": "2026-08-12"
