@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:54:49.365035",
+  "generated_at": "2026-08-11T21:56:25.261659",
   "mode": "LIVE",
   "portfolio_value": null,
   "cash": null,
@@ -21,10 +21,10 @@
     "available": true,
     "benchmark_name": "Nifty 50",
     "portfolio_daily_pct": 0.26,
-    "benchmark_daily_pct": -0.4,
+    "benchmark_daily_pct": -0.37,
     "portfolio_since_inception_pct": 0.25,
     "benchmark_since_inception_pct": -0.46,
     "excess_return_pct": 0.71
   },
-  "as_of": "2026-08-11T21:54:26.785209"
+  "as_of": "2026-08-11T21:56:09.792537"
 }

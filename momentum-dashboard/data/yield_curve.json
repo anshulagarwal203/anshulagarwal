@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:54:54.240546",
+  "generated_at": "2026-08-11T21:56:29.055215",
   "available": true,
   "source": "US Treasury (home.treasury.gov) - Daily Treasury Par Yield Curve Rates",
   "as_of_date": "08/11/2026",
@@ -84,6 +84,6 @@
   ],
   "spread_10y_2y_bps": 48.0,
   "curve_inverted_10y_2y": false,
-  "as_of": "2026-08-11T21:54:26.785209",
+  "as_of": "2026-08-11T21:56:09.792537",
   "mode": "LIVE"
 }

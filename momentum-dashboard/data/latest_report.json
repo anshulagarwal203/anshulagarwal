@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-11T21:54:48.963245",
-  "as_of": "2026-08-11T21:54:26.785209",
+  "generated_at": "2026-08-11T21:56:24.856054",
+  "as_of": "2026-08-11T21:56:09.792537",
   "mode": "LIVE",
   "phase": "execute",
   "portfolio_value": null,
@@ -161,7 +161,7 @@
     "open_slots": 3
   },
   "errors": [
-    "PORTFOLIO RECONCILIATION FAILED: SMLMAH.NS: tracked=0 kite=1"
+    "INDIA_SWING_HALTED_LIVE.flag present \u2014 refusing to submit orders"
   ],
   "warnings": []
 }
