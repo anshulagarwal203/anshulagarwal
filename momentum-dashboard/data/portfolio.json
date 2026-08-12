@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T20:20:21.461885",
+  "generated_at": "2026-08-11T21:04:30.500392",
   "mode": "PAPER",
   "portfolio_value": 999565.9685450001,
   "cash": 131503.05854499998,
@@ -24,7 +24,7 @@
     "available": true,
     "benchmark_name": "Nifty 50",
     "portfolio_daily_pct": -0.04,
-    "benchmark_daily_pct": -0.46,
+    "benchmark_daily_pct": -0.12,
     "portfolio_since_inception_pct": -0.04,
     "benchmark_since_inception_pct": 0.05,
     "excess_return_pct": -0.09
