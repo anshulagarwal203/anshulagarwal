@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-11T21:49:13.582659",
-  "as_of": "2026-08-11T21:48:52.838908",
+  "generated_at": "2026-08-11T21:54:48.963245",
+  "as_of": "2026-08-11T21:54:26.785209",
   "mode": "LIVE",
   "phase": "execute",
   "portfolio_value": null,
   "cash": null,
-  "num_holdings": 2,
+  "num_holdings": 3,
   "today_execution": {
     "executed": true,
     "fills": [
@@ -161,7 +161,7 @@
     "open_slots": 3
   },
   "errors": [
-    "PORTFOLIO RECONCILIATION FAILED: PTC.NS: tracked=7 kite=0; VOGL.NS: tracked=15 kite=0"
+    "PORTFOLIO RECONCILIATION FAILED: SMLMAH.NS: tracked=0 kite=1"
   ],
   "warnings": []
 }

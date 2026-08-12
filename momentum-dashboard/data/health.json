@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-11T21:49:18.035603",
+  "generated_at": "2026-08-11T21:54:53.855272",
   "overall_healthy": false,
   "scheduler": {
     "last_scan": "2026-08-12",
     "last_execute": "2026-08-12",
-    "last_health_check": "2026-08-11T21:23:11.441380",
+    "last_health_check": "2026-08-11T21:50:19.533344",
     "next_scheduled_run": "2026-08-11 at 16:00 IST (scan) / 09:00 IST (execute)"
   },
   "broker_connection": {
@@ -20,7 +20,7 @@
   "dashboard_status": "generated today",
   "portfolio_sync": {
     "ok": false,
-    "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nPTC.NS: tracked=7 kite=0\nVOGL.NS: tracked=15 kite=0\n\nResolve manually (compare Kite holdings vs loca"
+    "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nSMLMAH.NS: tracked=0 kite=1\n\nResolve manually (compare Kite holdings vs local state), then delete th"
   },
   "report_generation": {
     "dashboard": "generated today",
@@ -108,15 +108,15 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-11T21:48:52.838908, phase=execute, mode=LIVE)"
+      "detail": "Last run 0.0h ago (2026-08-11T21:54:26.785209, phase=execute, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
-      "detail": "india_swing_positions_live.csv: 2 position(s); india_swing_positions_paper.csv: 5 position(s)"
+      "detail": "india_swing_positions_live.csv: 3 position(s); india_swing_positions_paper.csv: 5 position(s)"
     },
     "halt_flags": {
       "ok": false,
-      "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nPTC.NS: tracked=7 kite=0\nVOGL.NS: tracked=15 kite=0\n\nResolve manually (compare Kite holdings vs loca"
+      "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nSMLMAH.NS: tracked=0 kite=1\n\nResolve manually (compare Kite holdings vs local state), then delete th"
     },
     "disk_usage": {
       "ok": true,
@@ -139,6 +139,6 @@
       "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-11T21:48:52.838908",
+  "as_of": "2026-08-11T21:54:26.785209",
   "mode": "LIVE"
 }
