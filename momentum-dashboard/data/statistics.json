@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:04:30.924932",
+  "generated_at": "2026-08-11T21:12:30.742535",
   "n_trades": 0,
   "cagr_pct": null,
   "annualized_return_pct": null,
@@ -15,8 +15,8 @@
   "largest_win": null,
   "largest_loss": null,
   "expectancy_per_trade": 0,
-  "exposure_pct": 17.63,
-  "cash_pct": 82.37,
+  "exposure_pct": 1.48,
+  "cash_pct": 98.52,
   "rolling_alpha_beta": {
     "available": false,
     "n_days": 2,
@@ -26,7 +26,7 @@
   "total_pnl": 0,
   "avg_days_held": 0,
   "equity_history_sufficient": false,
-  "equity_history_note": "Only 0 day(s) of equity history spanned (need 3+) \u2014 CAGR/Sharpe/Sortino/MaxDD/Calmar withheld rather than reported from noise.",
-  "as_of": "2026-08-06T00:05:23.036739",
-  "mode": "PAPER"
+  "equity_history_note": "Only 1 day(s) of equity history spanned (need 3+) \u2014 CAGR/Sharpe/Sortino/MaxDD/Calmar withheld rather than reported from noise.",
+  "as_of": "2026-08-11T21:10:54.339922",
+  "mode": "LIVE"
 }
