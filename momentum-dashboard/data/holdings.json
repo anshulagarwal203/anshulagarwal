@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T19:56:49.766481",
+  "generated_at": "2026-08-13T21:03:44.824015",
   "holdings": [
     {
       "ticker": "SMLMAH.NS",
@@ -14,7 +14,7 @@
       "momentum_rank": 3,
       "roc_pct": -5.61,
       "rsi": 58.7,
-      "weight_pct": 75.03
+      "weight_pct": 67.62
     },
     {
       "ticker": "PTC.NS",
@@ -29,7 +29,22 @@
       "momentum_rank": 2,
       "roc_pct": 9.87,
       "rsi": 53.2,
-      "weight_pct": 16.73
+      "weight_pct": 15.08
+    },
+    {
+      "ticker": "VISL.NS",
+      "company": "VISL.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-13",
+      "entry_price": 37.78,
+      "current_price": 37.78,
+      "shares": 20,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 9.88
     },
     {
       "ticker": "VOGL.NS",
@@ -44,9 +59,9 @@
       "momentum_rank": 1,
       "roc_pct": 12.51,
       "rsi": 54.1,
-      "weight_pct": 8.24
+      "weight_pct": 7.42
     }
   ],
-  "as_of": "2026-08-13T19:56:34.780979",
+  "as_of": "2026-08-13T21:03:11.738967",
   "mode": "LIVE"
 }

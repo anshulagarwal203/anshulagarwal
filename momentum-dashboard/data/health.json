@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T19:56:52.759795",
+  "generated_at": "2026-08-13T21:03:48.767842",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": "2026-08-12",
@@ -108,11 +108,11 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-13T19:56:34.780979, phase=execute, mode=LIVE)"
+      "detail": "Last run 0.0h ago (2026-08-13T21:03:11.738967, phase=execute, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
-      "detail": "india_swing_positions_live.csv: 3 position(s); india_swing_positions_paper.csv: 5 position(s)"
+      "detail": "india_swing_positions_live.csv: 4 position(s); india_swing_positions_paper.csv: 5 position(s)"
     },
     "halt_flags": {
       "ok": true,
@@ -120,7 +120,7 @@
     },
     "disk_usage": {
       "ok": true,
-      "detail": "206.4 GB free"
+      "detail": "206.9 GB free"
     },
     "log_size": {
       "ok": true,
@@ -139,6 +139,6 @@
       "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-13T19:56:34.780979",
+  "as_of": "2026-08-13T21:03:11.738967",
   "mode": "LIVE"
 }

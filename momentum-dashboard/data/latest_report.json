@@ -1,14 +1,23 @@
 {
-  "generated_at": "2026-08-13T19:56:49.326985",
-  "as_of": "2026-08-13T19:56:34.780979",
+  "generated_at": "2026-08-13T21:03:44.075340",
+  "as_of": "2026-08-13T21:03:11.738967",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": null,
-  "cash": null,
-  "num_holdings": 3,
+  "portfolio_value": 9996.14388,
+  "cash": 2283.9038800000003,
+  "num_holdings": 4,
   "today_execution": {
     "executed": true,
-    "fills": [],
+    "fills": [
+      {
+        "symbol": "VISL.NS",
+        "action": "BUY",
+        "qty": 20,
+        "price": 37.7795,
+        "timestamp": "2026-08-14 09:33:28",
+        "slippage_pct": -2.8055055312580364
+      }
+    ],
     "ist_date": "2026-08-14"
   },
   "top_10_candidates": [
@@ -144,7 +153,5 @@
     "open_slots": 2
   },
   "errors": [],
-  "warnings": [
-    "Execute skipped \u2014 Outside NSE market hours (09:15-15:30 IST). Pending orders left untouched for the next valid attempt."
-  ]
+  "warnings": []
 }
