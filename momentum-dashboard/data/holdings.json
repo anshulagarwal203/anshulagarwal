@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T21:57:02.287048",
+  "generated_at": "2026-08-13T19:44:12.351430",
   "holdings": [
     {
       "ticker": "SMLMAH.NS",
@@ -7,14 +7,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 5183.5,
-      "current_price": 5183.5,
+      "current_price": 5172.0,
       "shares": 1,
-      "current_return_pct": 0.0,
-      "holding_days": null,
-      "momentum_rank": null,
-      "roc_pct": null,
-      "rsi": null,
-      "weight_pct": 74.24
+      "current_return_pct": -0.22,
+      "holding_days": 2,
+      "momentum_rank": 3,
+      "roc_pct": -5.61,
+      "rsi": 58.7,
+      "weight_pct": 75.03
     },
     {
       "ticker": "PTC.NS",
@@ -22,14 +22,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 169.65,
-      "current_price": 171.95,
+      "current_price": 164.8,
       "shares": 7,
-      "current_return_pct": 1.36,
-      "holding_days": 0,
-      "momentum_rank": 1,
-      "roc_pct": 16.86,
-      "rsi": 62.3,
-      "weight_pct": 17.24
+      "current_return_pct": -2.86,
+      "holding_days": 2,
+      "momentum_rank": 2,
+      "roc_pct": 9.87,
+      "rsi": 53.2,
+      "weight_pct": 16.73
     },
     {
       "ticker": "VOGL.NS",
@@ -37,16 +37,16 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 39.04,
-      "current_price": 39.67,
+      "current_price": 37.85,
       "shares": 15,
-      "current_return_pct": 1.61,
-      "holding_days": 0,
-      "momentum_rank": 2,
-      "roc_pct": 16.06,
-      "rsi": 59.9,
-      "weight_pct": 8.52
+      "current_return_pct": -3.05,
+      "holding_days": 2,
+      "momentum_rank": 1,
+      "roc_pct": 12.51,
+      "rsi": 54.1,
+      "weight_pct": 8.24
     }
   ],
-  "as_of": "2026-08-11T21:56:09.792537",
+  "as_of": "2026-08-13T19:43:36.664878",
   "mode": "LIVE"
 }
