@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-13T19:44:11.882099",
-  "as_of": "2026-08-13T19:43:36.664878",
+  "generated_at": "2026-08-13T19:47:11.618120",
+  "as_of": "2026-08-13T19:46:57.449577",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": 9996.521675,
-  "cash": 3039.8716750000003,
+  "portfolio_value": null,
+  "cash": null,
   "num_holdings": 3,
   "today_execution": {
     "executed": true,
@@ -143,8 +143,8 @@
     "currently_held": 3,
     "open_slots": 2
   },
-  "errors": [
-    "PRE-TRADE CHECK FAILED for BUY VISL.NS: Outside NSE market hours (09:15-15:30 IST) \u2014 order NOT submitted"
-  ],
-  "warnings": []
+  "errors": [],
+  "warnings": [
+    "Execute skipped \u2014 Outside NSE market hours (09:15-15:30 IST). Pending orders left untouched for the next valid attempt."
+  ]
 }
