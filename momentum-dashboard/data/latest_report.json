@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-16T21:06:16.888491",
-  "as_of": "2026-08-16T21:03:22.637166",
+  "generated_at": "2026-08-16T21:10:01.912030",
+  "as_of": "2026-08-16T21:09:31.691429",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": 9899.88229,
-  "cash": 6954.24229,
+  "portfolio_value": 9899.03319,
+  "cash": 5255.19319,
   "num_holdings": 4,
   "today_execution": {
     "executed": true,
@@ -40,6 +40,30 @@
         "price": 778.5,
         "timestamp": "2026-08-17 09:21:50",
         "slippage_pct": 0.0
+      },
+      {
+        "symbol": "VOGL.NS",
+        "action": "BUY",
+        "qty": 13,
+        "price": 37.59,
+        "timestamp": "2026-08-17 09:39:41",
+        "slippage_pct": -0.2653223666754957
+      },
+      {
+        "symbol": "VISL.NS",
+        "action": "BUY",
+        "qty": 15,
+        "price": 36.95,
+        "timestamp": "2026-08-17 09:39:45",
+        "slippage_pct": -0.45797413793101993
+      },
+      {
+        "symbol": "PINELABS.NS",
+        "action": "BUY",
+        "qty": 4,
+        "price": 163.82,
+        "timestamp": "2026-08-17 09:39:48",
+        "slippage_pct": -0.34673641949023254
       }
     ],
     "ist_date": "2026-08-17"
@@ -176,11 +200,6 @@
     "currently_held": 4,
     "open_slots": 1
   },
-  "errors": [
-    "PRE-TRADE CHECK FAILED for BUY PINELABS.NS: Portfolio state mismatch for PINELABS.NS: tracked=5 broker=0 \u2014 order NOT submitted"
-  ],
-  "warnings": [
-    "ENTRY NOT FILLED VOGL.NS: TIMEOUT (No terminal status after 60s (last=OPEN)) \u2014 no position opened",
-    "ENTRY NOT FILLED VISL.NS: TIMEOUT (No terminal status after 60s (last=OPEN)) \u2014 no position opened"
-  ]
+  "errors": [],
+  "warnings": []
 }
