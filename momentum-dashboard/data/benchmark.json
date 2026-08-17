@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T21:10:02.532686",
+  "generated_at": "2026-08-17T09:37:23.655815",
   "benchmarks": {
     "NIFTY50": {
       "name": "Nifty 50",
@@ -9,23 +9,32 @@
         "2026-08-10T00:00:00": 100.0,
         "2026-08-11T00:00:00": 99.97,
         "2026-08-12T00:00:00": 99.75,
-        "2026-08-13T00:00:00": 99.96
+        "2026-08-13T00:00:00": 99.96,
+        "2026-08-17T00:00:00": 98.89
       },
       "normalized_benchmark": {
         "2026-08-10T00:00:00": 100.0,
         "2026-08-11T00:00:00": 99.54,
         "2026-08-12T00:00:00": 99.4,
-        "2026-08-13T00:00:00": 99.24
+        "2026-08-13T00:00:00": 99.24,
+        "2026-08-17T00:00:00": 98.8
       },
       "relative_metrics": {
-        "available": false,
+        "available": true,
         "n_days": 4,
-        "note": "Only 4 aligned day(s) \u2014 need at least 5 for a meaningful comparison."
+        "alpha_annualized_pct": 63.21,
+        "beta": 1.745,
+        "tracking_error_pct": 7.714,
+        "information_ratio": 0.838,
+        "relative_performance_pct": 0.098,
+        "portfolio_max_drawdown_pct": -1.107,
+        "portfolio_total_return_pct": -1.107,
+        "benchmark_total_return_pct": -1.205
       },
       "rolling_alpha_beta": {
         "available": false,
-        "n_days": 4,
-        "note": "Need at least 21 aligned days for a 20-day rolling window; have 4."
+        "n_days": 5,
+        "note": "Need at least 21 aligned days for a 20-day rolling window; have 5."
       }
     },
     "NIFTY500": {
@@ -36,13 +45,49 @@
         "2026-08-10T00:00:00": 100.0,
         "2026-08-11T00:00:00": 99.97,
         "2026-08-12T00:00:00": 99.75,
-        "2026-08-13T00:00:00": 99.96
+        "2026-08-13T00:00:00": 99.96,
+        "2026-08-17T00:00:00": 98.89
       },
       "normalized_benchmark": {
         "2026-08-10T00:00:00": 100.0,
         "2026-08-11T00:00:00": 99.74,
         "2026-08-12T00:00:00": 99.7,
-        "2026-08-13T00:00:00": 99.64
+        "2026-08-13T00:00:00": 99.64,
+        "2026-08-17T00:00:00": 99.25
+      },
+      "relative_metrics": {
+        "available": true,
+        "n_days": 4,
+        "alpha_annualized_pct": 48.744,
+        "beta": 2.493,
+        "tracking_error_pct": 6.954,
+        "information_ratio": -3.194,
+        "relative_performance_pct": -0.354,
+        "portfolio_max_drawdown_pct": -1.107,
+        "portfolio_total_return_pct": -1.107,
+        "benchmark_total_return_pct": -0.753
+      },
+      "rolling_alpha_beta": {
+        "available": false,
+        "n_days": 5,
+        "note": "Need at least 21 aligned days for a 20-day rolling window; have 5."
+      }
+    },
+    "NIFTYMIDCAP150": {
+      "name": "Nifty Midcap 150",
+      "ticker": "NIFTYMIDCAP150.NS",
+      "available": true,
+      "normalized_portfolio": {
+        "2026-08-10T00:00:00": 100.0,
+        "2026-08-12T00:00:00": 99.75,
+        "2026-08-13T00:00:00": 99.96,
+        "2026-08-17T00:00:00": 98.89
+      },
+      "normalized_benchmark": {
+        "2026-08-10T00:00:00": 100.0,
+        "2026-08-12T00:00:00": 100.22,
+        "2026-08-13T00:00:00": 100.29,
+        "2026-08-17T00:00:00": 99.93
       },
       "relative_metrics": {
         "available": false,
@@ -54,33 +99,8 @@
         "n_days": 4,
         "note": "Need at least 21 aligned days for a 20-day rolling window; have 4."
       }
-    },
-    "NIFTYMIDCAP150": {
-      "name": "Nifty Midcap 150",
-      "ticker": "NIFTYMIDCAP150.NS",
-      "available": true,
-      "normalized_portfolio": {
-        "2026-08-10T00:00:00": 100.0,
-        "2026-08-12T00:00:00": 99.75,
-        "2026-08-13T00:00:00": 99.96
-      },
-      "normalized_benchmark": {
-        "2026-08-10T00:00:00": 100.0,
-        "2026-08-12T00:00:00": 100.22,
-        "2026-08-13T00:00:00": 100.29
-      },
-      "relative_metrics": {
-        "available": false,
-        "n_days": 3,
-        "note": "Only 3 aligned day(s) \u2014 need at least 5 for a meaningful comparison."
-      },
-      "rolling_alpha_beta": {
-        "available": false,
-        "n_days": 3,
-        "note": "Need at least 21 aligned days for a 20-day rolling window; have 3."
-      }
     }
   },
-  "as_of": "2026-08-16T21:09:31.691429",
+  "as_of": "2026-08-17T09:12:49.075094",
   "mode": "LIVE"
 }
