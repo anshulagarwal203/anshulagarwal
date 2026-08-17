@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T09:54:43.379778",
+  "generated_at": "2026-08-17T10:24:52.192786",
   "mode": "LIVE",
   "portfolio_value": 9889.29319,
   "cash": 5255.19319,
@@ -19,10 +19,10 @@
   },
   "monthly_return": null,
   "ytd_return": null,
-  "cagr_pct": -10.61,
+  "cagr_pct": -10.23,
   "win_rate_pct": 0.0,
-  "sharpe_ratio": -1.882,
-  "sortino_ratio": -1.479,
+  "sharpe_ratio": -1.845,
+  "sortino_ratio": -1.42,
   "max_drawdown_pct": -1.81,
   "equity_history_sufficient": true,
   "benchmark_comparison": {
@@ -34,5 +34,5 @@
     "benchmark_since_inception_pct": -1.2,
     "excess_return_pct": 0.09
   },
-  "as_of": "2026-08-17T09:39:16.951773"
+  "as_of": "2026-08-17T10:09:48.813612"
 }
