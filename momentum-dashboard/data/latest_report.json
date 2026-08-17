@@ -1,14 +1,39 @@
 {
-  "generated_at": "2026-08-16T20:39:32.770190",
-  "as_of": "2026-08-16T20:39:16.770884",
+  "generated_at": "2026-08-16T20:46:57.016624",
+  "as_of": "2026-08-16T20:45:15.676159",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": null,
-  "cash": null,
-  "num_holdings": 4,
+  "portfolio_value": 9900.27154,
+  "cash": 7733.13154,
+  "num_holdings": 3,
   "today_execution": {
     "executed": true,
-    "fills": [],
+    "fills": [
+      {
+        "symbol": "PTC.NS",
+        "action": "SELL",
+        "qty": 7,
+        "price": 162.89,
+        "timestamp": "2026-08-17 09:15:25",
+        "slippage_pct": null
+      },
+      {
+        "symbol": "SMLMAH.NS",
+        "action": "SELL",
+        "qty": 1,
+        "price": 5138.5,
+        "timestamp": "2026-08-17 09:15:27",
+        "slippage_pct": null
+      },
+      {
+        "symbol": "PINELABS.NS",
+        "action": "BUY",
+        "qty": 5,
+        "price": 165.19,
+        "timestamp": "2026-08-17 09:16:41",
+        "slippage_pct": 0.0
+      }
+    ],
     "ist_date": "2026-08-17"
   },
   "top_10_candidates": [
@@ -143,8 +168,10 @@
     "currently_held": 4,
     "open_slots": 1
   },
-  "errors": [],
+  "errors": [
+    "PORTFOLIO RECONCILIATION FAILED: PTC.NS: tracked=0 kite=-7; SMLMAH.NS: tracked=0 kite=-1"
+  ],
   "warnings": [
-    "Execute skipped \u2014 Outside NSE market hours (09:15-15:30 IST). Pending orders left untouched for the next valid attempt."
+    "ENTRY NOT FILLED SKYGOLD.NS: TIMEOUT (No terminal status after 60s (last=OPEN)) \u2014 no position opened"
   ]
 }

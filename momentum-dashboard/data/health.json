@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T20:39:36.095053",
+  "generated_at": "2026-08-16T20:47:00.313205",
   "overall_healthy": false,
   "scheduler": {
     "last_scan": "2026-08-12",
@@ -20,7 +20,7 @@
   "dashboard_status": "generated today",
   "portfolio_sync": {
     "ok": false,
-    "detail": "HALT FLAG(S) PRESENT: AUTOMATION_HALTED.flag: Automation halted 2026-08-16T20:21:33.247088\nPeriodic health check failed after 2 retries (20s apart):\n- last_successful_scan: Last run 68.6h ago (202"
+    "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nPTC.NS: tracked=0 kite=-7\nSMLMAH.NS: tracked=0 kite=-1\n\nResolve manually (compare Kite holdings vs l; AUTOMATION_HALTED.flag: Automation halted 2026-08-16T20:21:33.247088\nPeriodic health check failed after 2 retries (20s apart):\n- last_successful_scan: Last run 68.6h ago (202"
   },
   "report_generation": {
     "dashboard": "generated today",
@@ -108,15 +108,15 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-16T20:39:16.770884, phase=execute, mode=LIVE)"
+      "detail": "Last run 0.0h ago (2026-08-16T20:45:15.676159, phase=execute, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
-      "detail": "india_swing_positions_live.csv: 4 position(s); india_swing_positions_paper.csv: 5 position(s)"
+      "detail": "india_swing_positions_live.csv: 3 position(s); india_swing_positions_paper.csv: 5 position(s)"
     },
     "halt_flags": {
       "ok": false,
-      "detail": "HALT FLAG(S) PRESENT: AUTOMATION_HALTED.flag: Automation halted 2026-08-16T20:21:33.247088\nPeriodic health check failed after 2 retries (20s apart):\n- last_successful_scan: Last run 68.6h ago (202"
+      "detail": "HALT FLAG(S) PRESENT: INDIA_SWING_HALTED_LIVE.flag: Trading halted \u2014 portfolio reconciliation failed.\nPTC.NS: tracked=0 kite=-7\nSMLMAH.NS: tracked=0 kite=-1\n\nResolve manually (compare Kite holdings vs l; AUTOMATION_HALTED.flag: Automation halted 2026-08-16T20:21:33.247088\nPeriodic health check failed after 2 retries (20s apart):\n- last_successful_scan: Last run 68.6h ago (202"
     },
     "disk_usage": {
       "ok": true,
@@ -139,6 +139,6 @@
       "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-16T20:39:16.770884",
+  "as_of": "2026-08-16T20:45:15.676159",
   "mode": "LIVE"
 }

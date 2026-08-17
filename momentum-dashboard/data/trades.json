@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-08-16T20:39:33.200741",
-  "trades": [],
-  "as_of": "2026-08-16T20:39:16.770884",
+  "generated_at": "2026-08-16T20:46:57.457106",
+  "trades": [
+    {
+      "symbol": "PTC.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-16",
+      "holding_period_days": 5,
+      "entry_price": 169.65,
+      "exit_price": 162.89,
+      "shares": 7,
+      "pnl": -47.32,
+      "return_pct": -3.98,
+      "exit_reason": "stop_touch(162.21)"
+    },
+    {
+      "symbol": "SMLMAH.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-16",
+      "holding_period_days": 5,
+      "entry_price": 5183.5,
+      "exit_price": 5138.5,
+      "shares": 1,
+      "pnl": -45.0,
+      "return_pct": -0.87,
+      "exit_reason": "roc_breakdown_2d(ROC=-9.7%)"
+    }
+  ],
+  "as_of": "2026-08-16T20:45:15.676159",
   "mode": "LIVE"
 }

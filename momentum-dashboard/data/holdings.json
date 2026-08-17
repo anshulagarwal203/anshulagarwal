@@ -1,35 +1,20 @@
 {
-  "generated_at": "2026-08-16T20:39:33.200730",
+  "generated_at": "2026-08-16T20:46:57.456773",
   "holdings": [
     {
-      "ticker": "SMLMAH.NS",
-      "company": "SMLMAH.NS",
+      "ticker": "PINELABS.NS",
+      "company": "PINELABS.NS",
       "sector": "Unknown",
-      "entry_date": "2026-08-11",
-      "entry_price": 5183.5,
-      "current_price": 5134.5,
-      "shares": 1,
-      "current_return_pct": -0.95,
-      "holding_days": 5,
-      "momentum_rank": 4,
-      "roc_pct": -9.69,
-      "rsi": 57.7,
-      "weight_pct": 67.92
-    },
-    {
-      "ticker": "PTC.NS",
-      "company": "PTC.NS",
-      "sector": "Unknown",
-      "entry_date": "2026-08-11",
-      "entry_price": 169.65,
-      "current_price": 161.47,
-      "shares": 7,
-      "current_return_pct": -4.82,
-      "holding_days": 5,
-      "momentum_rank": 3,
-      "roc_pct": 3.73,
-      "rsi": 49.4,
-      "weight_pct": 14.95
+      "entry_date": "2026-08-16",
+      "entry_price": 165.19,
+      "current_price": 165.19,
+      "shares": 5,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 38.95
     },
     {
       "ticker": "VISL.NS",
@@ -44,7 +29,7 @@
       "momentum_rank": 1,
       "roc_pct": 14.22,
       "rsi": 58.9,
-      "weight_pct": 9.75
+      "weight_pct": 34.78
     },
     {
       "ticker": "VOGL.NS",
@@ -59,9 +44,9 @@
       "momentum_rank": 2,
       "roc_pct": 4.5,
       "rsi": 51.8,
-      "weight_pct": 7.37
+      "weight_pct": 26.27
     }
   ],
-  "as_of": "2026-08-16T20:39:16.770884",
+  "as_of": "2026-08-16T20:45:15.676159",
   "mode": "LIVE"
 }
