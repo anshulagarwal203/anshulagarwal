@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-17T09:37:22.258955",
-  "as_of": "2026-08-17T09:12:49.075094",
+  "generated_at": "2026-08-17T09:54:42.894533",
+  "as_of": "2026-08-17T09:39:16.951773",
   "mode": "LIVE",
   "phase": "scan",
   "portfolio_value": 9889.29319,
@@ -190,16 +190,18 @@
       "reason": "RSI too high"
     }
   ],
-  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 110 of 492 screened names qualify today. MOREPENLAB.NS (MOREPENLAB.NS) leads the screen with +55.42% 10-day ROC and RSI 77.0, rejected (RSI too high). Today's opportunity set (110 qualifying candidates) is roughly in line with the trailing 14-day average (93.4). Momentum is concentrated: Materials accounts for 106 of 110 qualifying candidates (96%), across 5 sector(s) total.",
+  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 109 of 491 screened names qualify today. MOREPENLAB.NS (MOREPENLAB.NS) leads the screen with +55.42% 10-day ROC and RSI 77.0, rejected (RSI too high). Today's opportunity set (109 qualifying candidates) is roughly in line with the trailing 15-day average (94.5). Momentum is concentrated: Materials accounts for 105 of 109 qualifying candidates (96%), across 5 sector(s) total.",
   "market_summary": {
     "nifty_price": 24287.65,
     "nifty_ma50": 24102.52,
     "nifty_above_50dma": true,
-    "qualifying_candidates": 110,
+    "qualifying_candidates": 109,
     "rejected_candidates": 382,
     "currently_held": 4,
     "open_slots": 1
   },
   "errors": [],
-  "warnings": []
+  "warnings": [
+    "No/insufficient bars for OIL.NS"
+  ]
 }
