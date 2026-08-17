@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T20:52:16.476770",
+  "generated_at": "2026-08-16T21:06:17.128552",
   "mode": "LIVE",
   "portfolio_value": 9899.88229,
   "cash": 6954.24229,
@@ -14,20 +14,20 @@
   "weekly_return": null,
   "monthly_return": null,
   "ytd_return": null,
-  "cagr_pct": -11.37,
+  "cagr_pct": -10.89,
   "win_rate_pct": 0.0,
-  "sharpe_ratio": -1.855,
-  "sortino_ratio": -1.442,
+  "sharpe_ratio": -1.812,
+  "sortino_ratio": -1.373,
   "max_drawdown_pct": -1.81,
   "equity_history_sufficient": true,
   "benchmark_comparison": {
     "available": true,
     "benchmark_name": "Nifty 50",
-    "portfolio_daily_pct": -0.0,
-    "benchmark_daily_pct": -0.27,
+    "portfolio_daily_pct": 0.0,
+    "benchmark_daily_pct": -0.29,
     "portfolio_since_inception_pct": -0.04,
     "benchmark_since_inception_pct": -0.76,
     "excess_return_pct": 0.72
   },
-  "as_of": "2026-08-16T20:51:38.630212"
+  "as_of": "2026-08-16T21:03:22.637166"
 }
