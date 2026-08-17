@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-16T20:46:57.016624",
-  "as_of": "2026-08-16T20:45:15.676159",
+  "generated_at": "2026-08-16T20:52:16.212320",
+  "as_of": "2026-08-16T20:51:38.630212",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": 9900.27154,
-  "cash": 7733.13154,
-  "num_holdings": 3,
+  "portfolio_value": 9899.88229,
+  "cash": 6954.24229,
+  "num_holdings": 4,
   "today_execution": {
     "executed": true,
     "fills": [
@@ -31,6 +31,14 @@
         "qty": 5,
         "price": 165.19,
         "timestamp": "2026-08-17 09:16:41",
+        "slippage_pct": 0.0
+      },
+      {
+        "symbol": "SKYGOLD.NS",
+        "action": "BUY",
+        "qty": 1,
+        "price": 778.5,
+        "timestamp": "2026-08-17 09:21:50",
         "slippage_pct": 0.0
       }
     ],
@@ -168,10 +176,6 @@
     "currently_held": 4,
     "open_slots": 1
   },
-  "errors": [
-    "PORTFOLIO RECONCILIATION FAILED: PTC.NS: tracked=0 kite=-7; SMLMAH.NS: tracked=0 kite=-1"
-  ],
-  "warnings": [
-    "ENTRY NOT FILLED SKYGOLD.NS: TIMEOUT (No terminal status after 60s (last=OPEN)) \u2014 no position opened"
-  ]
+  "errors": [],
+  "warnings": []
 }

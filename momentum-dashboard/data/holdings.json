@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T20:46:57.456773",
+  "generated_at": "2026-08-16T20:52:16.622670",
   "holdings": [
     {
       "ticker": "PINELABS.NS",
@@ -14,7 +14,22 @@
       "momentum_rank": null,
       "roc_pct": null,
       "rsi": null,
-      "weight_pct": 38.95
+      "weight_pct": 28.49
+    },
+    {
+      "ticker": "SKYGOLD.NS",
+      "company": "SKYGOLD.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-16",
+      "entry_price": 778.5,
+      "current_price": 778.5,
+      "shares": 1,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 26.85
     },
     {
       "ticker": "VISL.NS",
@@ -29,7 +44,7 @@
       "momentum_rank": 1,
       "roc_pct": 14.22,
       "rsi": 58.9,
-      "weight_pct": 34.78
+      "weight_pct": 25.44
     },
     {
       "ticker": "VOGL.NS",
@@ -44,9 +59,9 @@
       "momentum_rank": 2,
       "roc_pct": 4.5,
       "rsi": 51.8,
-      "weight_pct": 26.27
+      "weight_pct": 19.22
     }
   ],
-  "as_of": "2026-08-16T20:45:15.676159",
+  "as_of": "2026-08-16T20:51:38.630212",
   "mode": "LIVE"
 }
