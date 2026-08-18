@@ -1,72 +1,15 @@
 {
-  "generated_at": "2026-08-17T11:25:00.990985",
-  "as_of": "2026-08-17T11:10:24.502745",
+  "generated_at": "2026-08-17T19:59:51.928957",
+  "as_of": "2026-08-17T19:59:19.648887",
   "mode": "LIVE",
-  "phase": "scan",
-  "portfolio_value": 9889.29319,
-  "cash": 5255.19319,
+  "phase": "execute",
+  "portfolio_value": null,
+  "cash": null,
   "num_holdings": 4,
   "today_execution": {
     "executed": true,
-    "fills": [
-      {
-        "symbol": "PTC.NS",
-        "action": "SELL",
-        "qty": 7,
-        "price": 162.89,
-        "timestamp": "2026-08-17 09:15:25",
-        "slippage_pct": null
-      },
-      {
-        "symbol": "SMLMAH.NS",
-        "action": "SELL",
-        "qty": 1,
-        "price": 5138.5,
-        "timestamp": "2026-08-17 09:15:27",
-        "slippage_pct": null
-      },
-      {
-        "symbol": "PINELABS.NS",
-        "action": "BUY",
-        "qty": 5,
-        "price": 165.19,
-        "timestamp": "2026-08-17 09:16:41",
-        "slippage_pct": 0.0
-      },
-      {
-        "symbol": "SKYGOLD.NS",
-        "action": "BUY",
-        "qty": 1,
-        "price": 778.5,
-        "timestamp": "2026-08-17 09:21:50",
-        "slippage_pct": 0.0
-      },
-      {
-        "symbol": "VOGL.NS",
-        "action": "BUY",
-        "qty": 13,
-        "price": 37.59,
-        "timestamp": "2026-08-17 09:39:41",
-        "slippage_pct": -0.2653223666754957
-      },
-      {
-        "symbol": "VISL.NS",
-        "action": "BUY",
-        "qty": 15,
-        "price": 36.95,
-        "timestamp": "2026-08-17 09:39:45",
-        "slippage_pct": -0.45797413793101993
-      },
-      {
-        "symbol": "PINELABS.NS",
-        "action": "BUY",
-        "qty": 4,
-        "price": 163.82,
-        "timestamp": "2026-08-17 09:39:48",
-        "slippage_pct": -0.34673641949023254
-      }
-    ],
-    "ist_date": "2026-08-17"
+    "fills": [],
+    "ist_date": "2026-08-18"
   },
   "top_10_candidates": [
     {
@@ -74,10 +17,10 @@
       "ticker": "MOREPENLAB.NS",
       "name": "MOREPENLAB.NS",
       "sector": "Unknown",
-      "price": 89.6,
-      "roc_pct": 55.42,
-      "rsi": 77.0,
-      "momentum_score": 55.42,
+      "price": 89.82,
+      "roc_pct": 55.8,
+      "rsi": 77.1,
+      "momentum_score": 55.8,
       "status": "Rejected",
       "reason": "RSI too high"
     },
@@ -86,10 +29,10 @@
       "ticker": "EMIL.NS",
       "name": "EMIL.NS",
       "sector": "Unknown",
-      "price": 192.6,
-      "roc_pct": 46.63,
+      "price": 192.42,
+      "roc_pct": 46.49,
       "rsi": 82.6,
-      "momentum_score": 46.63,
+      "momentum_score": 46.49,
       "status": "Rejected",
       "reason": "RSI too high"
     },
@@ -98,10 +41,10 @@
       "ticker": "RBA.NS",
       "name": "RBA.NS",
       "sector": "Unknown",
-      "price": 99.5,
-      "roc_pct": 40.62,
-      "rsi": 79.0,
-      "momentum_score": 40.62,
+      "price": 99.59,
+      "roc_pct": 40.74,
+      "rsi": 79.1,
+      "momentum_score": 40.74,
       "status": "Rejected",
       "reason": "RSI too high"
     },
@@ -110,10 +53,10 @@
       "ticker": "TDPOWERSYS.NS",
       "name": "TDPOWERSYS.NS",
       "sector": "Unknown",
-      "price": 1549.0,
-      "roc_pct": 39.25,
+      "price": 1548.8,
+      "roc_pct": 39.23,
       "rsi": 76.4,
-      "momentum_score": 39.25,
+      "momentum_score": 39.23,
       "status": "Rejected",
       "reason": "RSI too high"
     },
@@ -122,34 +65,34 @@
       "ticker": "SBCL.NS",
       "name": "SBCL.NS",
       "sector": "Unknown",
-      "price": 1024.75,
-      "roc_pct": 34.23,
+      "price": 1024.6,
+      "roc_pct": 34.21,
       "rsi": 70.0,
-      "momentum_score": 34.23,
+      "momentum_score": 34.21,
       "status": "Rejected",
       "reason": "RSI too high"
     },
     {
       "rank": 6,
-      "ticker": "MANYAVAR.NS",
-      "name": "MANYAVAR.NS",
+      "ticker": "SHILPAMED.NS",
+      "name": "SHILPAMED.NS",
       "sector": "Unknown",
-      "price": 543.85,
-      "roc_pct": 29.87,
-      "rsi": 84.2,
-      "momentum_score": 29.87,
+      "price": 809.3,
+      "roc_pct": 29.79,
+      "rsi": 76.0,
+      "momentum_score": 29.79,
       "status": "Rejected",
       "reason": "RSI too high"
     },
     {
       "rank": 7,
-      "ticker": "SHILPAMED.NS",
-      "name": "SHILPAMED.NS",
+      "ticker": "MANYAVAR.NS",
+      "name": "MANYAVAR.NS",
       "sector": "Unknown",
-      "price": 809.0,
-      "roc_pct": 29.74,
-      "rsi": 75.9,
-      "momentum_score": 29.74,
+      "price": 541.85,
+      "roc_pct": 29.4,
+      "rsi": 84.0,
+      "momentum_score": 29.4,
       "status": "Rejected",
       "reason": "RSI too high"
     },
@@ -158,48 +101,50 @@
       "ticker": "ROLEXRINGS.NS",
       "name": "ROLEXRINGS.NS",
       "sector": "Unknown",
-      "price": 179.3,
-      "roc_pct": 28.9,
+      "price": 179.46,
+      "roc_pct": 29.02,
       "rsi": 72.9,
-      "momentum_score": 28.9,
+      "momentum_score": 29.02,
       "status": "Rejected",
       "reason": "RSI too high"
     },
     {
       "rank": 9,
-      "ticker": "SAPPHIRE.NS",
-      "name": "SAPPHIRE.NS",
+      "ticker": "AZAD.NS",
+      "name": "AZAD.NS",
       "sector": "Unknown",
-      "price": 235.49,
-      "roc_pct": 25.61,
-      "rsi": 73.8,
-      "momentum_score": 25.61,
+      "price": 2899.9,
+      "roc_pct": 25.71,
+      "rsi": 76.6,
+      "momentum_score": 25.71,
       "status": "Rejected",
       "reason": "RSI too high"
     },
     {
       "rank": 10,
-      "ticker": "AZAD.NS",
-      "name": "AZAD.NS",
+      "ticker": "SAPPHIRE.NS",
+      "name": "SAPPHIRE.NS",
       "sector": "Unknown",
-      "price": 2874.0,
-      "roc_pct": 24.59,
-      "rsi": 75.9,
-      "momentum_score": 24.59,
+      "price": 234.68,
+      "roc_pct": 25.18,
+      "rsi": 73.4,
+      "momentum_score": 25.18,
       "status": "Rejected",
       "reason": "RSI too high"
     }
   ],
-  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 110 of 492 screened names qualify today. MOREPENLAB.NS (MOREPENLAB.NS) leads the screen with +55.42% 10-day ROC and RSI 77.0, rejected (RSI too high). Today's opportunity set (110 qualifying candidates) is roughly in line with the trailing 18-day average (97.0). Momentum is concentrated: Materials accounts for 106 of 110 qualifying candidates (96%), across 5 sector(s) total.",
+  "commentary": "Nifty 50 is above its 50-day moving average (market filter bullish); 104 of 492 screened names qualify today. MOREPENLAB.NS (MOREPENLAB.NS) leads the screen with +55.80% 10-day ROC and RSI 77.1, rejected (RSI too high). Today's opportunity set (104 qualifying candidates) is roughly in line with the trailing 19-day average (97.7). Momentum is concentrated: Unknown accounts for 101 of 104 qualifying candidates (97%), across 4 sector(s) total.",
   "market_summary": {
     "nifty_price": 24287.65,
     "nifty_ma50": 24102.52,
     "nifty_above_50dma": true,
-    "qualifying_candidates": 110,
-    "rejected_candidates": 382,
+    "qualifying_candidates": 104,
+    "rejected_candidates": 388,
     "currently_held": 4,
     "open_slots": 1
   },
   "errors": [],
-  "warnings": []
+  "warnings": [
+    "Execute skipped \u2014 Outside NSE market hours (09:15-15:30 IST). Pending orders left untouched for the next valid attempt."
+  ]
 }

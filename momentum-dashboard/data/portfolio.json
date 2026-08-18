@@ -1,38 +1,35 @@
 {
-  "generated_at": "2026-08-17T11:25:01.586451",
+  "generated_at": "2026-08-17T19:59:52.361376",
   "mode": "LIVE",
-  "portfolio_value": 9889.29319,
-  "cash": 5255.19319,
-  "invested_capital": 4634.1,
-  "open_pnl": -9.74,
+  "portfolio_value": null,
+  "cash": null,
+  "invested_capital": null,
+  "open_pnl": -20.34,
   "closed_pnl": -92.32,
   "num_holdings": 4,
-  "today_return": {
-    "available": true,
-    "change_pct": -0.09839344724936498
-  },
+  "today_return": null,
   "weekly_return": {
     "available": true,
-    "change_pct": -1.107,
+    "change_pct": -1.213,
     "prior_equity": 10000.0,
-    "current_equity": 9889.29
+    "current_equity": 9878.69
   },
   "monthly_return": null,
   "ytd_return": null,
-  "cagr_pct": -9.53,
+  "cagr_pct": -10.06,
   "win_rate_pct": 0.0,
-  "sharpe_ratio": -1.777,
-  "sortino_ratio": -1.315,
+  "sharpe_ratio": -1.916,
+  "sortino_ratio": -1.466,
   "max_drawdown_pct": -1.81,
   "equity_history_sufficient": true,
   "benchmark_comparison": {
     "available": true,
     "benchmark_name": "Nifty 50",
-    "portfolio_daily_pct": 0.0,
-    "benchmark_daily_pct": -0.32,
-    "portfolio_since_inception_pct": -1.11,
-    "benchmark_since_inception_pct": -1.2,
-    "excess_return_pct": 0.09
+    "portfolio_daily_pct": -0.11,
+    "benchmark_daily_pct": -0.12,
+    "portfolio_since_inception_pct": -0.04,
+    "benchmark_since_inception_pct": -0.76,
+    "excess_return_pct": 0.72
   },
-  "as_of": "2026-08-17T11:10:24.502745"
+  "as_of": "2026-08-17T19:59:19.648887"
 }

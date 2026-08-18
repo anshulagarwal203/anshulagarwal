@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T11:25:01.842805",
+  "generated_at": "2026-08-17T19:59:52.679069",
   "holdings": [
     {
       "ticker": "PINELABS.NS",
@@ -7,14 +7,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-16",
       "entry_price": 164.58,
-      "current_price": 163.15,
+      "current_price": 162.63,
       "shares": 9,
-      "current_return_pct": -0.87,
+      "current_return_pct": -1.19,
       "holding_days": 1,
       "momentum_rank": 3,
-      "roc_pct": 7.22,
-      "rsi": 57.5,
-      "weight_pct": 31.69
+      "roc_pct": 6.87,
+      "rsi": 57.0,
+      "weight_pct": 31.66
     },
     {
       "ticker": "VISL.NS",
@@ -22,14 +22,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-13",
       "entry_price": 37.42,
-      "current_price": 38.09,
+      "current_price": 37.97,
       "shares": 35,
-      "current_return_pct": 1.78,
+      "current_return_pct": 1.46,
       "holding_days": 4,
-      "momentum_rank": 1,
-      "roc_pct": 12.39,
-      "rsi": 62.1,
-      "weight_pct": 28.77
+      "momentum_rank": 2,
+      "roc_pct": 12.04,
+      "rsi": 61.8,
+      "weight_pct": 28.74
     },
     {
       "ticker": "VOGL.NS",
@@ -37,14 +37,14 @@
       "sector": "Unknown",
       "entry_date": "2026-08-11",
       "entry_price": 38.37,
-      "current_price": 37.7,
+      "current_price": 37.66,
       "shares": 28,
-      "current_return_pct": -1.74,
+      "current_return_pct": -1.84,
       "holding_days": 6,
       "momentum_rank": 4,
-      "roc_pct": 6.98,
-      "rsi": 53.5,
-      "weight_pct": 22.78
+      "roc_pct": 6.87,
+      "rsi": 53.4,
+      "weight_pct": 22.81
     },
     {
       "ticker": "SKYGOLD.NS",
@@ -52,16 +52,16 @@
       "sector": "Unknown",
       "entry_date": "2026-08-16",
       "entry_price": 778.5,
-      "current_price": 777.0,
+      "current_price": 776.4,
       "shares": 1,
-      "current_return_pct": -0.19,
+      "current_return_pct": -0.27,
       "holding_days": 1,
-      "momentum_rank": 2,
-      "roc_pct": 12.31,
-      "rsi": 67.0,
-      "weight_pct": 16.77
+      "momentum_rank": 1,
+      "roc_pct": 12.22,
+      "rsi": 66.9,
+      "weight_pct": 16.79
     }
   ],
-  "as_of": "2026-08-17T11:10:24.502745",
+  "as_of": "2026-08-17T19:59:19.648887",
   "mode": "LIVE"
 }
