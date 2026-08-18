@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T19:59:52.834214",
+  "generated_at": "2026-08-17T20:53:38.126444",
   "n_trades": 2,
   "cagr_pct": -10.06,
   "annualized_return_pct": -10.06,
@@ -27,6 +27,6 @@
   "avg_days_held": 5.0,
   "equity_history_sufficient": true,
   "equity_history_note": null,
-  "as_of": "2026-08-17T19:59:19.648887",
+  "as_of": "2026-08-17T20:53:15.853659",
   "mode": "LIVE"
 }
