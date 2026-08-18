@@ -1,6 +1,21 @@
 {
-  "generated_at": "2026-08-17T20:53:37.919320",
+  "generated_at": "2026-08-17T20:54:55.625797",
   "holdings": [
+    {
+      "ticker": "ATHERENERG.NS",
+      "company": "ATHERENERG.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-17",
+      "entry_price": 1484.1,
+      "current_price": 1484.1,
+      "shares": 1,
+      "current_return_pct": 0.0,
+      "holding_days": null,
+      "momentum_rank": null,
+      "roc_pct": null,
+      "rsi": null,
+      "weight_pct": 24.3
+    },
     {
       "ticker": "PINELABS.NS",
       "company": "PINELABS.NS",
@@ -14,7 +29,7 @@
       "momentum_rank": 3,
       "roc_pct": 6.87,
       "rsi": 57.0,
-      "weight_pct": 31.66
+      "weight_pct": 23.96
     },
     {
       "ticker": "VISL.NS",
@@ -29,7 +44,7 @@
       "momentum_rank": 2,
       "roc_pct": 12.04,
       "rsi": 61.8,
-      "weight_pct": 28.74
+      "weight_pct": 21.76
     },
     {
       "ticker": "VOGL.NS",
@@ -44,7 +59,7 @@
       "momentum_rank": 4,
       "roc_pct": 6.87,
       "rsi": 53.4,
-      "weight_pct": 22.81
+      "weight_pct": 17.27
     },
     {
       "ticker": "SKYGOLD.NS",
@@ -59,9 +74,9 @@
       "momentum_rank": 1,
       "roc_pct": 12.22,
       "rsi": 66.9,
-      "weight_pct": 16.79
+      "weight_pct": 12.71
     }
   ],
-  "as_of": "2026-08-17T20:53:15.853659",
+  "as_of": "2026-08-17T20:54:07.075682",
   "mode": "LIVE"
 }

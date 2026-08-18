@@ -1,14 +1,23 @@
 {
-  "generated_at": "2026-08-17T20:53:37.154397",
-  "as_of": "2026-08-17T20:53:15.853659",
+  "generated_at": "2026-08-17T20:54:54.960584",
+  "as_of": "2026-08-17T20:54:07.075682",
   "mode": "LIVE",
   "phase": "execute",
-  "portfolio_value": null,
-  "cash": null,
-  "num_holdings": 4,
+  "portfolio_value": 9898.29114,
+  "cash": 3770.35114,
+  "num_holdings": 5,
   "today_execution": {
     "executed": true,
-    "fills": [],
+    "fills": [
+      {
+        "symbol": "ATHERENERG.NS",
+        "action": "BUY",
+        "qty": 1,
+        "price": 1484.1,
+        "timestamp": "2026-08-18 09:24:37",
+        "slippage_pct": -0.27550060475743426
+      }
+    ],
     "ist_date": "2026-08-18"
   },
   "top_10_candidates": [
@@ -144,7 +153,5 @@
     "open_slots": 1
   },
   "errors": [],
-  "warnings": [
-    "Live batch NOT confirmed by operator \u2014 no orders submitted"
-  ]
+  "warnings": []
 }
