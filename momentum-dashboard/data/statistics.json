@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T20:54:55.837076",
+  "generated_at": "2026-08-20T20:01:39.577740",
   "n_trades": 2,
   "cagr_pct": -8.23,
   "annualized_return_pct": -8.23,
@@ -19,14 +19,14 @@
   "cash_pct": 68.7,
   "rolling_alpha_beta": {
     "available": false,
-    "n_days": 4,
-    "note": "Need at least 21 aligned days for a 20-day rolling window; have 4."
+    "n_days": 5,
+    "note": "Need at least 21 aligned days for a 20-day rolling window; have 5."
   },
   "total_return_pct": -1.02,
   "total_pnl": -92.32,
   "avg_days_held": 5.0,
   "equity_history_sufficient": true,
   "equity_history_note": null,
-  "as_of": "2026-08-17T20:54:07.075682",
+  "as_of": "2026-08-20T20:01:05.699932",
   "mode": "LIVE"
 }

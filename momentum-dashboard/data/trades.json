@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T20:54:55.626723",
+  "generated_at": "2026-08-20T20:01:39.300368",
   "trades": [
     {
       "symbol": "PTC.NS",
@@ -28,6 +28,6 @@
       "exit_reason": "roc_breakdown_2d(ROC=-9.7%)"
     }
   ],
-  "as_of": "2026-08-17T20:54:07.075682",
+  "as_of": "2026-08-20T20:01:05.699932",
   "mode": "LIVE"
 }
