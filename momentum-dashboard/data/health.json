@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T20:01:43.399442",
+  "generated_at": "2026-08-20T20:47:28.545297",
   "overall_healthy": true,
   "scheduler": {
     "last_scan": "2026-08-12",
@@ -108,7 +108,7 @@
   "checks": {
     "last_successful_scan": {
       "ok": true,
-      "detail": "Last run 0.0h ago (2026-08-20T20:01:05.699932, phase=execute, mode=LIVE)"
+      "detail": "Last run 0.0h ago (2026-08-20T20:46:34.326074, phase=execute, mode=LIVE)"
     },
     "positions_file": {
       "ok": true,
@@ -120,11 +120,11 @@
     },
     "disk_usage": {
       "ok": true,
-      "detail": "207.7 GB free"
+      "detail": "210.8 GB free"
     },
     "log_size": {
       "ok": true,
-      "detail": "0.88 MB total across daily logs"
+      "detail": "0.94 MB total across daily logs"
     },
     "package_versions": {
       "ok": true,
@@ -139,6 +139,6 @@
       "detail": "All Kite checks passed"
     }
   },
-  "as_of": "2026-08-20T20:01:05.699932",
+  "as_of": "2026-08-20T20:46:34.326074",
   "mode": "LIVE"
 }

@@ -1,6 +1,19 @@
 {
-  "generated_at": "2026-08-20T20:01:39.300368",
+  "generated_at": "2026-08-20T20:47:24.265057",
   "trades": [
+    {
+      "symbol": "ATHERENERG.NS",
+      "sector": "Unknown",
+      "entry_date": "2026-08-17",
+      "exit_date": "2026-08-20",
+      "holding_period_days": 3,
+      "entry_price": 1484.1,
+      "exit_price": 1462.8,
+      "shares": 1,
+      "pnl": -21.3,
+      "return_pct": -1.44,
+      "exit_reason": "roc_breakdown_2d(ROC=-0.2%)"
+    },
     {
       "symbol": "PTC.NS",
       "sector": "Unknown",
@@ -28,6 +41,6 @@
       "exit_reason": "roc_breakdown_2d(ROC=-9.7%)"
     }
   ],
-  "as_of": "2026-08-20T20:01:05.699932",
+  "as_of": "2026-08-20T20:46:34.326074",
   "mode": "LIVE"
 }
